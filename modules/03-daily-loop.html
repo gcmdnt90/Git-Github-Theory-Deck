@@ -1,0 +1,94 @@
+<section>
+
+  <section class="module-cover" data-background-color="#fbfaf6">
+    <span class="modnum">03</span>
+    <p class="kicker">Module 3</p>
+    <h1>The everyday loop</h1>
+    <p class="lede">Five commands cover 90% of daily Git. Learn these and you can work for real.</p>
+    <aside class="notes">
+      Be honest: this is the module people actually need. Everything else is occasional. Drill the loop.
+    </aside>
+  </section>
+
+  <section>
+    <h2>The loop, once</h2>
+    <p style="font-size:.8em;">You repeat this cycle all day: see what changed, stage it, save it, share it.</p>
+    <div class="cmd-list">
+      <div class="cmd-row"><code>git status</code><span>What changed and what&rsquo;s staged. Run it constantly &mdash; it&rsquo;s free.</span></div>
+      <div class="cmd-row"><code>git add &lt;file&gt;</code><span>Put a change in the staging tray (<code>git add .</code> for everything).</span></div>
+      <div class="cmd-row"><code>git commit -m "message"</code><span>Save a snapshot of the staged changes, with a note.</span></div>
+      <div class="cmd-row"><code>git push</code><span>Send your commits up to GitHub.</span></div>
+      <div class="cmd-row"><code>git pull</code><span>Bring down commits others pushed. Do this before you start.</span></div>
+    </div>
+    <div class="takeaway">status &rarr; add &rarr; commit &rarr; push. Then <code>pull</code> to stay in sync. That&rsquo;s the job.</div>
+    <aside class="notes">
+      Two habits to preach: run status often, and pull before you begin a work session.
+    </aside>
+  </section>
+
+  <section data-background-color="#f4f8fb">
+    <h2>Saving your work &mdash; both ways</h2>
+    <div class="ha-grid">
+      <div class="ha-panel human">
+        <span class="ha-label">You (human)</span>
+        <pre><code class="language-bash">git add .
+git commit -m "Add intro section"
+git push</code></pre>
+        <p>Three commands: stage everything, snapshot it with a message, send it to GitHub.</p>
+      </div>
+      <div class="ha-panel agent">
+        <span class="ha-label">Ask the agent</span>
+        <p class="say">&ldquo;Commit the changes with a sensible message and push.&rdquo;</p>
+        <p>The agent runs the same three commands. It usually writes the commit message for you &mdash; read it before approving.</p>
+      </div>
+    </div>
+    <p class="footnote">GUI equivalent: VS Code&rsquo;s Source Control panel and GitHub Desktop do stage / commit / push with buttons &mdash; same three steps.</p>
+    <aside class="notes">
+      Point out the message is the one thing worth reviewing on the agent side. Everything else is mechanical.
+    </aside>
+  </section>
+
+  <section>
+    <h2>Seeing what&rsquo;s going on &mdash; both ways</h2>
+    <div class="ha-grid">
+      <div class="ha-panel human">
+        <span class="ha-label">You (human)</span>
+        <pre><code class="language-bash">git status      # what changed
+git diff        # the exact line edits
+git log --oneline   # history so far</code></pre>
+      </div>
+      <div class="ha-panel agent">
+        <span class="ha-label">Ask the agent</span>
+        <p class="say">&ldquo;What&rsquo;s changed since my last commit?&rdquo;</p>
+        <p class="say">&ldquo;Summarise the last five commits.&rdquo;</p>
+        <p>The agent reads the same output and explains it in plain language.</p>
+      </div>
+    </div>
+    <div class="takeaway"><code>status</code> = what, <code>diff</code> = which lines, <code>log</code> = history. These three answer &ldquo;what&rsquo;s happening?&rdquo;</div>
+    <aside class="notes">
+      diff is the reviewing tool. It's how you check both your own and the agent's changes before committing.
+    </aside>
+  </section>
+
+  <section data-background-color="#f4f8fb">
+    <h2>Starting a repo (you do this once)</h2>
+    <div class="cols" style="font-size:.8em;">
+      <div class="col">
+        <p><strong>New project on your machine:</strong></p>
+        <pre><code class="language-bash">git init            # make this folder a repo
+git add .
+git commit -m "First commit"</code></pre>
+      </div>
+      <div class="col">
+        <p><strong>Existing project from GitHub:</strong></p>
+        <pre><code class="language-bash">git clone https://github.com/user/project.git</code></pre>
+        <p style="font-size:.9em;">Clone downloads the repo <em>and</em> its full history, ready to work.</p>
+      </div>
+    </div>
+    <p class="footnote">Or just tell the agent: &ldquo;Initialise a git repo here&rdquo; / &ldquo;Clone this GitHub repo for me.&rdquo;</p>
+    <aside class="notes">
+      init vs clone is the one-time setup. After that it's the daily loop forever.
+    </aside>
+  </section>
+
+</section>

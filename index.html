@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Git &amp; GitHub — for humans and their agents</title>
+
+  <!-- reveal core -->
+  <link rel="stylesheet" href="vendor/reveal/dist/reset.css">
+  <link rel="stylesheet" href="vendor/reveal/dist/reveal.css">
+  <link rel="stylesheet" href="vendor/reveal/dist/theme/white.css" id="theme">
+  <!-- code highlighting -->
+  <link rel="stylesheet" href="vendor/reveal/plugin/highlight/monokai.css">
+  <!-- custom theme (overrides) -->
+  <link rel="stylesheet" href="css/theme.css">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+<!-- ==== MODULES INJECTED BY build.mjs — DO NOT EDIT index.html BY HAND ==== -->
+
+<!-- ===== 00-cover.html ===== -->
+<section>
+
+  <section class="deck-cover" data-background-color="#fbfaf6">
+    <div class="cover-copy">
+      <p class="kicker">A practical module &mdash; you and your agent</p>
+      <h1>Git &amp; GitHub</h1>
+      <p class="subtitle">The smallest set of ideas you need to track your work, undo mistakes, and collaborate &mdash; whether you type the commands yourself or ask an AI agent to do it.</p>
+      <p class="meta">Basic literacy module | For humans and their agents | 8 short modules</p>
+    </div>
+    <aside class="notes">
+      Frame the promise: by the end you can use git safely for real work. Every action is shown two ways &mdash;
+      what you type as a human, and what you say to an agent. The goal is confidence, not completeness.
+    </aside>
+  </section>
+
+  <section>
+    <h2>How this module reads</h2>
+    <p style="font-size:.85em;">Git is the same underneath no matter who drives. Throughout the deck, every action appears in two panels:</p>
+    <div class="ha-grid">
+      <div class="ha-panel human">
+        <span class="ha-label">You (human)</span>
+        <pre><code class="language-bash">git commit -m "Fix typo"</code></pre>
+        <p>You run the command in a terminal (or click the button in VS Code / GitHub Desktop).</p>
+      </div>
+      <div class="ha-panel agent">
+        <span class="ha-label">Ask the agent</span>
+        <p class="say">&ldquo;Commit this with a short message.&rdquo;</p>
+        <p>The agent runs the same git command for you &mdash; you review and approve the result.</p>
+      </div>
+    </div>
+    <div class="takeaway">Same git. Two ways to drive it. You should understand both, because you stay responsible either way.</div>
+    <aside class="notes">
+      Emphasise: delegating to an agent does not remove your responsibility. You still need the mental model
+      so you can tell whether the agent did the right thing.
+    </aside>
+  </section>
+
+  <section data-background-color="#f4f8fb">
+    <h2>The map</h2>
+    <p class="footnote">Why it matters first, then the daily habits, then collaborating and staying safe.</p>
+    <div class="course-map">
+      <div class="map-node" style="--card-accent:var(--ait-amber);">
+        <span class="icon-dot">1</span><span class="num">MODULE 01</span>
+        <h4>Why Git</h4><p>Time machine &amp; safety net</p>
+      </div>
+      <div class="map-node">
+        <span class="icon-dot">2</span><span class="num">MODULE 02</span>
+        <h4>Mental model</h4><p>Six words that unlock it</p>
+      </div>
+      <div class="map-node">
+        <span class="icon-dot">3</span><span class="num">MODULE 03</span>
+        <h4>Daily loop</h4><p>status, add, commit, push</p>
+      </div>
+      <div class="map-node">
+        <span class="icon-dot" style="color:var(--ait-violet);border-color:rgba(131,102,200,.42);">4</span><span class="num">MODULE 04</span>
+        <h4>Branching</h4><p>Work without breaking things</p>
+      </div>
+      <div class="map-node">
+        <span class="icon-dot" style="color:var(--ait-cyan);border-color:rgba(21,151,181,.42);">5</span><span class="num">MODULE 05</span>
+        <h4>GitHub</h4><p>Clone, push, pull requests</p>
+      </div>
+      <div class="map-node">
+        <span class="icon-dot" style="color:var(--ait-violet);border-color:rgba(131,102,200,.42);">6</span><span class="num">MODULE 06</span>
+        <h4>With agents</h4><p>Delegate &amp; review</p>
+      </div>
+      <div class="map-node">
+        <span class="icon-dot" style="color:var(--ait-red);border-color:rgba(201,75,75,.48);">7</span><span class="num">MODULE 07</span>
+        <h4>Never forget</h4><p>Secrets, undo, force-push</p>
+      </div>
+      <div class="map-node">
+        <span class="icon-dot" style="color:var(--ait-green);border-color:rgba(52,149,111,.48);">8</span><span class="num">MODULE 08</span>
+        <h4>Cheat sheet</h4><p>One page to keep</p>
+      </div>
+    </div>
+    <aside class="notes">
+      Walk the arc once: motivation (1-2), daily habit (3-4), collaboration (5), the agent angle (6),
+      the safety rules (7), and a reference card (8).
+    </aside>
+  </section>
+
+  <section>
+    <h2>One sentence to carry through</h2>
+    <div class="takeaway" style="font-size:1.15em;">Git saves <strong>snapshots</strong> of your work so you can go back, branch off, and share &mdash; and an agent can do all of it for you, but <strong>you review before it counts.</strong></div>
+    <p class="footnote">Everything else in this deck is detail hanging off that sentence.</p>
+    <aside class="notes">
+      This is the thesis. Snapshots + branching + sharing, with a human in the loop. If someone remembers only
+      this slide, they have the core.
+    </aside>
+  </section>
+
+</section>
+
+
+<!-- ===== 01-why-git.html ===== -->
+<section>
+
+  <section class="module-cover" data-background-color="#fbfaf6">
+    <span class="modnum">01</span>
+    <p class="kicker">Module 1</p>
+    <h1>Why Git is worth it</h1>
+    <p class="lede">Before the commands: what problem does it actually solve, and why do people who use it never go back?</p>
+    <aside class="notes">
+      Motivation first. If people feel the pain git removes, the commands later feel worth learning.
+    </aside>
+  </section>
+
+  <section>
+    <h2>The problem without Git</h2>
+    <div class="cols">
+      <div class="col" style="font-size:.82em;">
+        <p>You know this file folder:</p>
+        <pre><code class="language-text">report_final.docx
+report_final_v2.docx
+report_final_REAL.docx
+report_final_use-this-one.docx</code></pre>
+        <p>It breaks down the moment you need to answer: <em>what changed, when, and can I get the old version back?</em></p>
+      </div>
+      <div class="col" style="font-size:.82em;">
+        <p>And with two people editing, it gets worse: whose copy is right? Which changes got lost when you emailed versions back and forth?</p>
+        <div class="warnbox">Manual versioning fails silently. You only notice when something is already lost.</div>
+      </div>
+    </div>
+    <aside class="notes">
+      Everyone recognises the "_final_final" pattern. This is the emotional hook.
+    </aside>
+  </section>
+
+  <section data-background-color="#f4f8fb">
+    <h2>What Git gives you instead</h2>
+    <div class="cols c-3" style="font-size:.8em;">
+      <div class="card" style="--card-accent:var(--ait-amber);">
+        <h4>A time machine</h4>
+        <p>Every saved snapshot is recoverable. Broke something an hour ago? Go back to exactly how it was.</p>
+      </div>
+      <div class="card" style="--card-accent:var(--ait-green);">
+        <h4>A safety net</h4>
+        <p>Experiment freely. If it goes wrong, you throw the change away &mdash; the last good version is untouched.</p>
+      </div>
+      <div class="card" style="--card-accent:var(--ait-violet);">
+        <h4>A team workflow</h4>
+        <p>Many people change the same project at once, and Git merges the work and flags real conflicts.</p>
+      </div>
+    </div>
+    <div class="takeaway">Git turns &ldquo;don&rsquo;t touch it, it works&rdquo; into &ldquo;try anything, we can always go back.&rdquo;</div>
+    <aside class="notes">
+      Three benefits: recover, experiment safely, collaborate. Confidence to change things is the real payoff.
+    </aside>
+  </section>
+
+  <section>
+    <h2>Why it matters more in the age of agents</h2>
+    <div class="cols" style="font-size:.82em;">
+      <div class="col">
+        <p>An AI agent can change dozens of files in seconds. That is powerful &mdash; and risky if you can&rsquo;t see or undo what it did.</p>
+        <p>Git is what makes agent help <strong>safe to accept</strong>: every change is a reviewable snapshot you can inspect, keep, or throw away.</p>
+      </div>
+      <div class="col">
+        <div class="safebox"><strong>With Git:</strong> &ldquo;Show me exactly what you changed&rdquo; and &ldquo;undo that&rdquo; are one command away.</div>
+        <div class="warnbox"><strong>Without Git:</strong> an agent&rsquo;s edits overwrite your files with no record and no undo.</div>
+      </div>
+    </div>
+    <div class="takeaway">Git is the seatbelt for working with agents. It doesn&rsquo;t slow you down &mdash; it lets you go faster safely.</div>
+    <aside class="notes">
+      Tie motivation to the deck's theme: agents make version control non-optional, because they change a lot fast.
+    </aside>
+  </section>
+
+</section>
+
+
+<!-- ===== 02-mental-model.html ===== -->
+<section>
+
+  <section class="module-cover" data-background-color="#fbfaf6">
+    <span class="modnum">02</span>
+    <p class="kicker">Module 2</p>
+    <h1>The mental model</h1>
+    <p class="lede">Six words unlock almost everything in Git. Learn what they mean and the commands stop feeling random.</p>
+    <aside class="notes">
+      The single biggest reason git feels confusing is people learn commands before the model. Fix that here.
+    </aside>
+  </section>
+
+  <section>
+    <h2>The six words</h2>
+    <div class="cols c-3" style="font-size:.74em;">
+      <div class="card" style="--card-accent:var(--ait-cyan);">
+        <h4>Repository (repo)</h4>
+        <p>Your project folder, plus its entire history. Created once with <code>git init</code> or by cloning.</p>
+      </div>
+      <div class="card">
+        <h4>Working directory</h4>
+        <p>The actual files as they are right now on your computer, where you edit.</p>
+      </div>
+      <div class="card" style="--card-accent:var(--ait-amber);">
+        <h4>Staging area</h4>
+        <p>A holding tray. You pick which changes go into the next snapshot before you commit.</p>
+      </div>
+      <div class="card" style="--card-accent:var(--ait-green);">
+        <h4>Commit</h4>
+        <p>A saved snapshot with a message. The permanent, recoverable unit of history.</p>
+      </div>
+      <div class="card" style="--card-accent:var(--ait-violet);">
+        <h4>Branch</h4>
+        <p>A movable line of commits. Lets you work on something without touching the main version.</p>
+      </div>
+      <div class="card" style="--card-accent:var(--ait-violet);">
+        <h4>Remote</h4>
+        <p>A copy of the repo somewhere else &mdash; usually GitHub &mdash; that you push to and pull from.</p>
+      </div>
+    </div>
+    <aside class="notes">
+      Read them once slowly. Staging is the one newcomers miss; it's why commit is two steps (add, then commit).
+    </aside>
+  </section>
+
+  <section data-background-color="#f4f8fb">
+    <h2>How a change travels</h2>
+    <p style="font-size:.8em;">A change moves through four places. Each git command just moves it one step along:</p>
+    <div class="flow-boxes">
+      <div class="flow-box">
+        <span class="fb-name">Working dir</span>
+        <span class="fb-sub">you edit a file</span>
+      </div>
+      <div class="flow-box">
+        <span class="fb-name">Staging</span>
+        <span class="fb-sub"><code>git add</code></span>
+      </div>
+      <div class="flow-box">
+        <span class="fb-name">Local repo</span>
+        <span class="fb-sub"><code>git commit</code></span>
+      </div>
+      <div class="flow-box">
+        <span class="fb-name">Remote (GitHub)</span>
+        <span class="fb-sub"><code>git push</code></span>
+      </div>
+    </div>
+    <p class="footnote">And it comes back the other way with <code>git pull</code> when someone else pushed changes.</p>
+    <div class="takeaway">Almost every command you&rsquo;ll learn is just &ldquo;move this change one box to the right (or left).&rdquo;</div>
+    <aside class="notes">
+      This diagram is the spine of the whole deck. Point at it again in module 3. add = stage, commit = save locally,
+      push = send to GitHub, pull = receive from GitHub.
+    </aside>
+  </section>
+
+  <section>
+    <h2>Does the agent need a different model? No.</h2>
+    <div class="cols" style="font-size:.82em;">
+      <div class="col">
+        <p>When you ask an agent to &ldquo;save this and push it,&rdquo; it walks the exact same four boxes: it stages, commits, and pushes.</p>
+        <p>So this one diagram lets you <strong>check the agent&rsquo;s work</strong>. If it says &ldquo;committed and pushed,&rdquo; you know precisely what that means and where your change now lives.</p>
+      </div>
+      <div class="col">
+        <div class="safebox">Understanding the model is what turns you from &ldquo;hoping it worked&rdquo; into &ldquo;knowing it worked.&rdquo;</div>
+      </div>
+    </div>
+    <aside class="notes">
+      Reinforce: the mental model is the shared language between you and the agent. It's not extra work, it's leverage.
+    </aside>
+  </section>
+
+</section>
+
+
+<!-- ===== 03-daily-loop.html ===== -->
+<section>
+
+  <section class="module-cover" data-background-color="#fbfaf6">
+    <span class="modnum">03</span>
+    <p class="kicker">Module 3</p>
+    <h1>The everyday loop</h1>
+    <p class="lede">Five commands cover 90% of daily Git. Learn these and you can work for real.</p>
+    <aside class="notes">
+      Be honest: this is the module people actually need. Everything else is occasional. Drill the loop.
+    </aside>
+  </section>
+
+  <section>
+    <h2>The loop, once</h2>
+    <p style="font-size:.8em;">You repeat this cycle all day: see what changed, stage it, save it, share it.</p>
+    <div class="cmd-list">
+      <div class="cmd-row"><code>git status</code><span>What changed and what&rsquo;s staged. Run it constantly &mdash; it&rsquo;s free.</span></div>
+      <div class="cmd-row"><code>git add &lt;file&gt;</code><span>Put a change in the staging tray (<code>git add .</code> for everything).</span></div>
+      <div class="cmd-row"><code>git commit -m "message"</code><span>Save a snapshot of the staged changes, with a note.</span></div>
+      <div class="cmd-row"><code>git push</code><span>Send your commits up to GitHub.</span></div>
+      <div class="cmd-row"><code>git pull</code><span>Bring down commits others pushed. Do this before you start.</span></div>
+    </div>
+    <div class="takeaway">status &rarr; add &rarr; commit &rarr; push. Then <code>pull</code> to stay in sync. That&rsquo;s the job.</div>
+    <aside class="notes">
+      Two habits to preach: run status often, and pull before you begin a work session.
+    </aside>
+  </section>
+
+  <section data-background-color="#f4f8fb">
+    <h2>Saving your work &mdash; both ways</h2>
+    <div class="ha-grid">
+      <div class="ha-panel human">
+        <span class="ha-label">You (human)</span>
+        <pre><code class="language-bash">git add .
+git commit -m "Add intro section"
+git push</code></pre>
+        <p>Three commands: stage everything, snapshot it with a message, send it to GitHub.</p>
+      </div>
+      <div class="ha-panel agent">
+        <span class="ha-label">Ask the agent</span>
+        <p class="say">&ldquo;Commit the changes with a sensible message and push.&rdquo;</p>
+        <p>The agent runs the same three commands. It usually writes the commit message for you &mdash; read it before approving.</p>
+      </div>
+    </div>
+    <p class="footnote">GUI equivalent: VS Code&rsquo;s Source Control panel and GitHub Desktop do stage / commit / push with buttons &mdash; same three steps.</p>
+    <aside class="notes">
+      Point out the message is the one thing worth reviewing on the agent side. Everything else is mechanical.
+    </aside>
+  </section>
+
+  <section>
+    <h2>Seeing what&rsquo;s going on &mdash; both ways</h2>
+    <div class="ha-grid">
+      <div class="ha-panel human">
+        <span class="ha-label">You (human)</span>
+        <pre><code class="language-bash">git status      # what changed
+git diff        # the exact line edits
+git log --oneline   # history so far</code></pre>
+      </div>
+      <div class="ha-panel agent">
+        <span class="ha-label">Ask the agent</span>
+        <p class="say">&ldquo;What&rsquo;s changed since my last commit?&rdquo;</p>
+        <p class="say">&ldquo;Summarise the last five commits.&rdquo;</p>
+        <p>The agent reads the same output and explains it in plain language.</p>
+      </div>
+    </div>
+    <div class="takeaway"><code>status</code> = what, <code>diff</code> = which lines, <code>log</code> = history. These three answer &ldquo;what&rsquo;s happening?&rdquo;</div>
+    <aside class="notes">
+      diff is the reviewing tool. It's how you check both your own and the agent's changes before committing.
+    </aside>
+  </section>
+
+  <section data-background-color="#f4f8fb">
+    <h2>Starting a repo (you do this once)</h2>
+    <div class="cols" style="font-size:.8em;">
+      <div class="col">
+        <p><strong>New project on your machine:</strong></p>
+        <pre><code class="language-bash">git init            # make this folder a repo
+git add .
+git commit -m "First commit"</code></pre>
+      </div>
+      <div class="col">
+        <p><strong>Existing project from GitHub:</strong></p>
+        <pre><code class="language-bash">git clone https://github.com/user/project.git</code></pre>
+        <p style="font-size:.9em;">Clone downloads the repo <em>and</em> its full history, ready to work.</p>
+      </div>
+    </div>
+    <p class="footnote">Or just tell the agent: &ldquo;Initialise a git repo here&rdquo; / &ldquo;Clone this GitHub repo for me.&rdquo;</p>
+    <aside class="notes">
+      init vs clone is the one-time setup. After that it's the daily loop forever.
+    </aside>
+  </section>
+
+</section>
+
+
+<!-- ===== 04-branching.html ===== -->
+<section>
+
+  <section class="module-cover" data-background-color="#fbfaf6">
+    <span class="modnum">04</span>
+    <p class="kicker">Module 4</p>
+    <h1>Branching &amp; merging</h1>
+    <p class="lede">How to try something new without risking the version that already works.</p>
+    <aside class="notes">
+      Branching is what makes git feel safe for teams and for experiments. Keep it concrete.
+    </aside>
+  </section>
+
+  <section>
+    <h2>What a branch is for</h2>
+    <div class="cols" style="font-size:.82em;">
+      <div class="col">
+        <p>Your working version lives on a branch, usually called <code>main</code>. You want <code>main</code> to always work.</p>
+        <p>To try a change, you <strong>branch off</strong>: make a parallel copy, experiment there, and only bring it back to <code>main</code> when it&rsquo;s good.</p>
+      </div>
+      <div class="col">
+        <div class="safebox">If the experiment fails, you just delete the branch. <code>main</code> never knew it existed.</div>
+        <p style="font-size:.9em;">This is why teams can work in parallel: everyone on their own branch, merging in when ready.</p>
+      </div>
+    </div>
+    <aside class="notes">
+      The mental image: main is the trunk, branches are side experiments that either merge back or get thrown away.
+    </aside>
+  </section>
+
+  <section data-background-color="#f4f8fb">
+    <h2>Branching &mdash; both ways</h2>
+    <div class="ha-grid">
+      <div class="ha-panel human">
+        <span class="ha-label">You (human)</span>
+        <pre><code class="language-bash">git switch -c new-feature   # create + move to it
+# ...edit, add, commit as usual...
+git switch main             # go back
+git merge new-feature       # bring the work in</code></pre>
+      </div>
+      <div class="ha-panel agent">
+        <span class="ha-label">Ask the agent</span>
+        <p class="say">&ldquo;Make a branch called new-feature and work there.&rdquo;</p>
+        <p class="say">&ldquo;Merge new-feature back into main.&rdquo;</p>
+        <p>The agent runs the same switch / merge commands.</p>
+      </div>
+    </div>
+    <p class="footnote"><code>git switch</code> is the modern command; you may also see <code>git checkout</code> do the same job.</p>
+    <aside class="notes">
+      Create-and-switch is one flag: -c. Merge happens from the branch you want to receive the changes (main).
+    </aside>
+  </section>
+
+  <section>
+    <h2>Merge conflicts &mdash; not scary</h2>
+    <div class="cols" style="font-size:.82em;">
+      <div class="col">
+        <p>A conflict happens when two branches changed the <strong>same lines</strong>. Git can&rsquo;t guess which to keep, so it asks you.</p>
+        <p>It marks the spot in the file:</p>
+        <pre><code class="language-text">&lt;&lt;&lt;&lt;&lt;&lt;&lt; your version
+hello world
+=======
+hello there
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; their version</code></pre>
+      </div>
+      <div class="col">
+        <p>You edit the file to the version you want, delete the marker lines, then <code>git add</code> and <code>git commit</code>.</p>
+        <div class="ha-panel agent" style="margin-top:.4em;">
+          <span class="ha-label">Ask the agent</span>
+          <p class="say">&ldquo;Resolve this merge conflict, keeping both changes where sensible, and explain what you did.&rdquo;</p>
+        </div>
+      </div>
+    </div>
+    <div class="takeaway">A conflict is just Git asking a question. Agents are good at proposing a resolution &mdash; you confirm it&rsquo;s right.</div>
+    <aside class="notes">
+      Demystify conflicts: they're normal, they're local, nothing is lost. This is a great task to delegate then review.
+    </aside>
+  </section>
+
+</section>
+
+
+<!-- ===== 05-github.html ===== -->
+<section>
+
+  <section class="module-cover" data-background-color="#fbfaf6">
+    <span class="modnum">05</span>
+    <p class="kicker">Module 5</p>
+    <h1>GitHub</h1>
+    <p class="lede">Git lives on your computer. GitHub is the shared home online where teams meet.</p>
+    <aside class="notes">
+      Draw the line clearly: Git = the tool, GitHub = a website that hosts Git repos and adds collaboration features.
+    </aside>
+  </section>
+
+  <section>
+    <h2>Git vs GitHub &mdash; the one distinction people mix up</h2>
+    <div class="cols" style="font-size:.82em;">
+      <div class="col">
+        <div class="card" style="--card-accent:var(--ait-cyan);">
+          <h4>Git</h4>
+          <p>The version-control <strong>tool</strong> on your machine. Works fully offline. Made by no single company.</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card" style="--card-accent:var(--ait-violet);">
+          <h4>GitHub</h4>
+          <p>A <strong>website</strong> that hosts Git repos in the cloud and adds sharing, review, and issue tracking. (GitLab and Bitbucket are alternatives.)</p>
+        </div>
+      </div>
+    </div>
+    <div class="takeaway">You can use Git with no GitHub. GitHub is where Git repos go to be shared and collaborated on.</div>
+    <aside class="notes">
+      Analogy: Git is like a camera (takes snapshots); GitHub is like a shared photo album online. Optional but very common.
+    </aside>
+  </section>
+
+  <section data-background-color="#f4f8fb">
+    <h2>The GitHub connection</h2>
+    <p style="font-size:.8em;">Your local repo talks to GitHub through two commands you already met:</p>
+    <div class="cmd-list">
+      <div class="cmd-row"><code>git clone &lt;url&gt;</code><span>Copy a GitHub repo (with history) down to your machine.</span></div>
+      <div class="cmd-row"><code>git push</code><span>Send your local commits up to GitHub for others to see.</span></div>
+      <div class="cmd-row"><code>git pull</code><span>Bring down what others pushed. Do this before starting work.</span></div>
+    </div>
+    <div class="safebox" style="font-size:.9em;">Golden habit: <strong>pull before you start, push when you pause.</strong> It keeps you and your team in sync and avoids most conflicts.</div>
+    <aside class="notes">
+      clone once, then push/pull forever. The pull-first habit prevents the majority of merge headaches.
+    </aside>
+  </section>
+
+  <section>
+    <h2>Pull requests: how changes get reviewed</h2>
+    <div class="cols" style="font-size:.8em;">
+      <div class="col">
+        <p>A <strong>pull request (PR)</strong> is how you propose merging your branch into <code>main</code> on GitHub. It says: &ldquo;here&rsquo;s my work &mdash; please review before it goes in.&rdquo;</p>
+        <p>Teammates comment, request changes, and approve. Then the branch is merged through the GitHub button.</p>
+      </div>
+      <div class="col">
+        <p><strong>Also on GitHub:</strong></p>
+        <p style="font-size:.92em;"><span class="tag">Issues</span> a to-do / bug list for the project.<br>
+        <span class="tag">Fork</span> your own copy of someone else&rsquo;s repo to build on.<br>
+        <span class="tag">README</span> the front-page description of the repo.</p>
+      </div>
+    </div>
+    <div class="takeaway">A pull request is a review checkpoint. It&rsquo;s the same &ldquo;human approves before it counts&rdquo; idea, for teams.</div>
+    <aside class="notes">
+      PR = propose + review + merge. Connect it to the deck's theme: review before it counts, whether the author was a human or an agent.
+    </aside>
+  </section>
+
+  <section data-background-color="#f4f8fb">
+    <h2>Working with GitHub &mdash; both ways</h2>
+    <div class="ha-grid">
+      <div class="ha-panel human">
+        <span class="ha-label">You (human)</span>
+        <pre><code class="language-bash">git clone https://github.com/team/app.git
+git switch -c fix-typo
+# edit, commit
+git push -u origin fix-typo</code></pre>
+        <p>Then open a pull request on the GitHub website.</p>
+      </div>
+      <div class="ha-panel agent">
+        <span class="ha-label">Ask the agent</span>
+        <p class="say">&ldquo;Clone team/app, make a branch, fix the typo, push it, and open a pull request.&rdquo;</p>
+        <p>Agents with GitHub access can do the whole flow &mdash; you review the PR before merging.</p>
+      </div>
+    </div>
+    <p class="footnote">Pushing usually requires a one-time login (a token or SSH key). An agent may ask you to set this up once.</p>
+    <aside class="notes">
+      Note the auth reality: first push needs credentials. This is the one setup snag beginners hit.
+    </aside>
+  </section>
+
+</section>
+
+
+<!-- ===== 06-with-agents.html ===== -->
+<section>
+
+  <section class="module-cover" data-background-color="#fbfaf6">
+    <span class="modnum">06</span>
+    <p class="kicker">Module 6</p>
+    <h1>Working with agents</h1>
+    <p class="lede">An agent can run every Git command for you. The skill that stays yours: deciding what to accept.</p>
+    <aside class="notes">
+      This is the module that makes this deck different from a normal git tutorial. Emphasise judgement, not commands.
+    </aside>
+  </section>
+
+  <section>
+    <h2>What&rsquo;s worth delegating</h2>
+    <div class="cols" style="font-size:.8em;">
+      <div class="col">
+        <p><strong>Great to hand off</strong> <span class="tag safe">low risk</span></p>
+        <p>Writing commit messages &middot; staging and committing &middot; summarising history &middot; drafting a <code>.gitignore</code> &middot; explaining a diff &middot; proposing a conflict resolution.</p>
+      </div>
+      <div class="col">
+        <p><strong>Keep your hands on</strong> <span class="tag warn">high risk</span></p>
+        <p>Force-pushing &middot; deleting branches &middot; rewriting history &middot; anything touching shared <code>main</code> &middot; anything involving credentials or secrets.</p>
+      </div>
+    </div>
+    <div class="takeaway">Delegate the typing. Own the decisions that are hard to undo.</div>
+    <aside class="notes">
+      The split is by reversibility. Reversible + tedious = delegate. Irreversible or shared = you decide.
+    </aside>
+  </section>
+
+  <section data-background-color="#f4f8fb">
+    <h2>The review habit</h2>
+    <p style="font-size:.8em;">Before you accept an agent&rsquo;s Git work, do the same check you&rsquo;d do for a colleague&rsquo;s:</p>
+    <div class="cols c-3" style="font-size:.76em;">
+      <div class="card" style="--card-accent:var(--ait-amber);">
+        <h4>1. Read the diff</h4>
+        <p>&ldquo;Show me exactly what changed.&rdquo; Skim the actual lines, not just the summary.</p>
+      </div>
+      <div class="card" style="--card-accent:var(--ait-amber);">
+        <h4>2. Check the message</h4>
+        <p>Does the commit message honestly describe the change? Rewrite it if not.</p>
+      </div>
+      <div class="card" style="--card-accent:var(--ait-amber);">
+        <h4>3. Confirm the target</h4>
+        <p>Which branch? Pushed where? Never let a surprise land on shared <code>main</code>.</p>
+      </div>
+    </div>
+    <div class="safebox">Git makes this safe: because every agent action is a commit, you can always inspect it and undo it.</div>
+    <aside class="notes">
+      Three-step review. Reading the diff is non-negotiable. This is where the git mental model pays off directly.
+    </aside>
+  </section>
+
+  <section>
+    <h2>Good prompts for Git tasks</h2>
+    <div class="cols" style="font-size:.8em;">
+      <div class="col">
+        <p><span class="tag safe">Clear</span></p>
+        <p class="say">&ldquo;Stage only the changes in report.md, commit with message &lsquo;Add methods section&rsquo;, and show me the diff before pushing.&rdquo;</p>
+      </div>
+      <div class="col">
+        <p><span class="tag warn">Too vague</span></p>
+        <p class="say">&ldquo;Fix the git stuff and sort it out.&rdquo;</p>
+        <p style="font-size:.9em;">Vague prompts invite the agent to guess &mdash; and Git guesses can be hard to reverse.</p>
+      </div>
+    </div>
+    <div class="takeaway">Name the files, name the message, and ask to see the diff before anything is pushed.</div>
+    <aside class="notes">
+      Precision plus "show me before you push" is the safest delegation pattern. Model it live if presenting.
+    </aside>
+  </section>
+
+  <section data-background-color="#f4f8fb">
+    <h2>You stay responsible</h2>
+    <div class="cols" style="font-size:.84em;">
+      <div class="col">
+        <p>Your name goes on the commit. Your team relies on what lands in <code>main</code>. The agent is a fast pair of hands &mdash; the accountability is still yours.</p>
+      </div>
+      <div class="col">
+        <div class="safebox">This is why the earlier modules matter: you can only review what you understand. The mental model is what makes delegation safe.</div>
+      </div>
+    </div>
+    <aside class="notes">
+      Close the module by tying back to the thesis slide: agent does the work, human reviews before it counts.
+    </aside>
+  </section>
+
+</section>
+
+
+<!-- ===== 07-never-forget.html ===== -->
+<section>
+
+  <section class="module-cover" data-background-color="#fbfaf6">
+    <span class="modnum">07</span>
+    <p class="kicker">Module 7</p>
+    <h1>Rules to never forget</h1>
+    <p class="lede">The handful of habits and warnings that separate confident Git users from stressed ones.</p>
+    <aside class="notes">
+      This is the "if you remember nothing else" module. Practical safety, not theory.
+    </aside>
+  </section>
+
+  <section>
+    <h2>Good habits</h2>
+    <div class="cols c-3" style="font-size:.74em;">
+      <div class="card" style="--card-accent:var(--ait-green);">
+        <h4>Commit small &amp; often</h4>
+        <p>One logical change per commit. Small commits are easy to understand and easy to undo.</p>
+      </div>
+      <div class="card" style="--card-accent:var(--ait-green);">
+        <h4>Write real messages</h4>
+        <p>&ldquo;Fix login crash on empty email&rdquo; beats &ldquo;stuff&rdquo;. Future-you reads these.</p>
+      </div>
+      <div class="card" style="--card-accent:var(--ait-green);">
+        <h4>Pull before you start</h4>
+        <p>Sync with the team first. It prevents most merge conflicts.</p>
+      </div>
+    </div>
+    <div class="takeaway">Small commits + honest messages + pull first = 90% of a smooth Git life.</div>
+    <aside class="notes">
+      These three habits prevent most pain. Commit granularity is the one people underdo.
+    </aside>
+  </section>
+
+  <section data-background-color="#f4f8fb">
+    <h2>Two things that bite</h2>
+    <div class="cols" style="font-size:.82em;">
+      <div class="col">
+        <div class="warnbox"><strong>Never commit secrets.</strong> Passwords, API keys, tokens &mdash; once pushed, treat them as leaked <em>even if you delete them later</em>, because they stay in history.</div>
+        <p style="font-size:.9em;">Use a <code>.gitignore</code> file to tell Git which files to never track (keys, <code>.env</code>, large data, build junk).</p>
+      </div>
+      <div class="col">
+        <div class="warnbox"><strong>Don&rsquo;t force-push shared branches.</strong> <code>git push --force</code> can erase teammates&rsquo; work on <code>main</code>. If you ever need it, ask first and use it only on your own branch.</div>
+      </div>
+    </div>
+    <aside class="notes">
+      Secrets-in-history is the classic disaster. Force-push on shared main is the classic team disaster. Both are avoidable.
+    </aside>
+  </section>
+
+  <section>
+    <h2>How to undo (the calm menu)</h2>
+    <p style="font-size:.8em;">Almost nothing in Git is truly lost. Match the situation to the fix:</p>
+    <div class="cmd-list">
+      <div class="cmd-row"><code>git restore &lt;file&gt;</code><span>Throw away un-staged edits to a file &mdash; back to last commit.</span></div>
+      <div class="cmd-row"><code>git restore --staged &lt;file&gt;</code><span>Un-stage something you added by mistake.</span></div>
+      <div class="cmd-row"><code>git commit --amend</code><span>Fix the <em>last</em> commit&rsquo;s message or contents (before pushing).</span></div>
+      <div class="cmd-row"><code>git revert &lt;commit&gt;</code><span>Safely undo an <em>already-pushed</em> commit by adding an opposite one.</span></div>
+    </div>
+    <div class="safebox"><strong>Rule of thumb:</strong> <code>revert</code> for anything already shared (it&rsquo;s safe); <code>restore</code>/<code>amend</code> for local, not-yet-pushed work.</div>
+    <aside class="notes">
+      revert vs reset: teach revert (safe, adds a commit) for shared history; avoid reset --hard for beginners.
+    </aside>
+  </section>
+
+  <section data-background-color="#f4f8fb">
+    <h2>Undoing &mdash; both ways</h2>
+    <div class="ha-grid">
+      <div class="ha-panel human">
+        <span class="ha-label">You (human)</span>
+        <pre><code class="language-bash">git log --oneline      # find the bad commit
+git revert a1b2c3d      # undo it safely</code></pre>
+      </div>
+      <div class="ha-panel agent">
+        <span class="ha-label">Ask the agent</span>
+        <p class="say">&ldquo;My last commit broke things &mdash; revert it and explain what you did.&rdquo;</p>
+        <p>The agent finds the commit and reverts it. You confirm the right one was undone.</p>
+      </div>
+    </div>
+    <div class="takeaway">When something breaks: don&rsquo;t panic, don&rsquo;t delete files. Ask &ldquo;what changed?&rdquo;, then revert.</div>
+    <aside class="notes">
+      The emotional message: git means mistakes are recoverable. Reverting is a normal daily action, not a failure.
+    </aside>
+  </section>
+
+</section>
+
+
+<!-- ===== 08-cheatsheet.html ===== -->
+<section>
+
+  <section class="module-cover" data-background-color="#fbfaf6">
+    <span class="modnum">08</span>
+    <p class="kicker">Module 8</p>
+    <h1>The cheat sheet</h1>
+    <p class="lede">One page to keep. If you internalise this slide, you can use Git for real work today.</p>
+    <aside class="notes">
+      This is the takeaway artefact. Tell people to screenshot it. Everything here appeared earlier in context.
+    </aside>
+  </section>
+
+  <section>
+    <h2>The commands you actually use</h2>
+    <div class="cols" style="font-size:.72em;">
+      <div class="col">
+        <p><strong>Daily loop</strong></p>
+        <div class="cmd-list">
+          <div class="cmd-row"><code>git status</code><span>what changed</span></div>
+          <div class="cmd-row"><code>git add .</code><span>stage everything</span></div>
+          <div class="cmd-row"><code>git commit -m "..."</code><span>save a snapshot</span></div>
+          <div class="cmd-row"><code>git push</code><span>send to GitHub</span></div>
+          <div class="cmd-row"><code>git pull</code><span>get others&rsquo; work</span></div>
+        </div>
+      </div>
+      <div class="col">
+        <p><strong>Look &amp; branch &amp; undo</strong></p>
+        <div class="cmd-list">
+          <div class="cmd-row"><code>git diff</code><span>which lines changed</span></div>
+          <div class="cmd-row"><code>git log --oneline</code><span>history</span></div>
+          <div class="cmd-row"><code>git switch -c name</code><span>new branch</span></div>
+          <div class="cmd-row"><code>git merge name</code><span>bring branch in</span></div>
+          <div class="cmd-row"><code>git revert &lt;id&gt;</code><span>undo a pushed commit</span></div>
+        </div>
+      </div>
+    </div>
+    <aside class="notes">
+      Ten commands. This really is enough for the vast majority of daily work.
+    </aside>
+  </section>
+
+  <section data-background-color="#f4f8fb">
+    <h2>The rules, in one breath</h2>
+    <div class="cols" style="font-size:.8em;">
+      <div class="col">
+        <p class="say" style="background:rgba(52,149,111,.09);"><strong>Do:</strong> commit small &amp; often &middot; write honest messages &middot; pull before you start &middot; read the diff before you accept &middot; use <code>.gitignore</code>.</p>
+      </div>
+      <div class="col">
+        <p class="say" style="background:rgba(201,75,75,.09);"><strong>Don&rsquo;t:</strong> commit secrets &middot; force-push shared branches &middot; let an agent&rsquo;s change land on <code>main</code> unreviewed &middot; panic &mdash; almost nothing is truly lost.</p>
+      </div>
+    </div>
+    <div class="takeaway">Snapshots you can trust, branches to experiment, a remote to share &mdash; and a human who reviews before it counts.</div>
+    <aside class="notes">
+      The do/don't pairing is the safety summary. Close on the thesis sentence one more time.
+    </aside>
+  </section>
+
+  <section>
+    <h2>Working with your agent, summed up</h2>
+    <div class="ha-grid">
+      <div class="ha-panel human">
+        <span class="ha-label">Your job</span>
+        <p style="color:var(--ait-ink);font-size:.72em;">Understand the model. Decide what to change. Review the diff. Own what lands.</p>
+      </div>
+      <div class="ha-panel agent">
+        <span class="ha-label">The agent&rsquo;s job</span>
+        <p style="color:var(--ait-ink);font-size:.72em;">Run the commands. Draft messages. Explain history. Propose fixes and conflict resolutions.</p>
+      </div>
+    </div>
+    <div class="takeaway">You bring judgement; the agent brings speed. Git is the shared, reviewable record between you.</div>
+    <aside class="notes">
+      Final framing. This division of labour is the whole point of the module.
+    </aside>
+  </section>
+
+</section>
+
+
+<!-- ===== 99-references.html ===== -->
+<section>
+
+  <section class="module-cover" data-background-color="#fbfaf6">
+    <span class="modnum">&mdash;</span>
+    <p class="kicker">References</p>
+    <h1>Learn more</h1>
+    <p class="lede">Everything in this module comes from the official Git and GitHub documentation. Go deeper here.</p>
+    <aside class="notes">
+      Point people to primary sources only. These are the canonical, maintained references.
+    </aside>
+  </section>
+
+  <section>
+    <h2>Primary sources</h2>
+    <div class="cols" style="font-size:.8em;">
+      <div class="col">
+        <p><strong>Git (the tool)</strong></p>
+        <p class="sources">
+          <a href="https://git-scm.com/doc">Official Git documentation</a><br>
+          <a href="https://git-scm.com/book/en/v2">Pro Git book (free, full)</a><br>
+          <a href="https://git-scm.com/docs/gittutorial">git tutorial (man page)</a>
+        </p>
+      </div>
+      <div class="col">
+        <p><strong>GitHub (the platform)</strong></p>
+        <p class="sources">
+          <a href="https://docs.github.com/en/get-started">GitHub: Getting started</a><br>
+          <a href="https://docs.github.com/en/pull-requests">GitHub: About pull requests</a><br>
+          <a href="https://skills.github.com/">GitHub Skills (hands-on)</a>
+        </p>
+      </div>
+    </div>
+    <div class="takeaway">When in doubt, go to <code>git-scm.com</code> for Git and <code>docs.github.com</code> for GitHub. Both are authoritative and free.</div>
+    <aside class="notes">
+      All content in this deck is traceable to these two documentation sets. No third-party claims were relied on.
+    </aside>
+  </section>
+
+  <section data-background-color="#f4f8fb">
+    <h2>Quick reference, verbatim</h2>
+    <div class="quote-strip">
+      <blockquote>&ldquo;Git is a free and open source distributed version control system.&rdquo;<cite>git-scm.com</cite></blockquote>
+      <blockquote>&ldquo;A pull request&hellip; lets you tell others about changes you&rsquo;ve pushed to a branch.&rdquo;<cite>GitHub Docs</cite></blockquote>
+    </div>
+    <p class="sources"><strong>Sources:</strong> <a href="https://git-scm.com/">Git homepage</a>; <a href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests">GitHub &mdash; About pull requests</a>.</p>
+    <aside class="notes">
+      Two short authoritative definitions to reinforce the Git-vs-GitHub distinction from module 5.
+    </aside>
+  </section>
+
+  <section>
+    <h2>That&rsquo;s the module</h2>
+    <div class="takeaway" style="font-size:1.1em;">You now have the mental model, the daily loop, the collaboration flow, the safety rules &mdash; and how to do all of it with an agent while staying in control.</div>
+    <p class="footnote">Next step: open a real folder, run <code>git init</code>, and make your first commit. Or ask your agent to walk you through it.</p>
+    <aside class="notes">
+      End on action. The best way to cement this is one real commit. Invite them to do it now, solo or with the agent.
+    </aside>
+  </section>
+
+</section>
+
+<!-- ==== END MODULES ==== -->
+    </div>
+  </div>
+
+  <script src="vendor/reveal/dist/reveal.js"></script>
+  <script src="vendor/reveal/plugin/notes/notes.js"></script>
+  <script src="vendor/reveal/plugin/highlight/highlight.js"></script>
+  <script src="vendor/reveal/plugin/zoom/zoom.js"></script>
+  <script src="vendor/reveal/plugin/search/search.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      history: true,
+      slideNumber: 'c/t',
+      transition: 'slide',
+      backgroundTransition: 'fade',
+      controls: true,
+      progress: true,
+      center: false,
+      width: 1280,
+      height: 720,
+      margin: 0.06,
+      minScale: 0.2,
+      maxScale: 1.5,
+      plugins: [ RevealNotes, RevealHighlight, RevealZoom, RevealSearch ]
+    });
+  </script>
+</body>
+</html>

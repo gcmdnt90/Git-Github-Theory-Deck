@@ -1,0 +1,88 @@
+<section>
+
+  <section class="module-cover" data-background-color="#fbfaf6">
+    <span class="modnum">06</span>
+    <p class="kicker">Module 6</p>
+    <h1>Working with agents</h1>
+    <p class="lede">An agent can run every Git command for you. The skill that stays yours: deciding what to accept.</p>
+    <aside class="notes">
+      This is the module that makes this deck different from a normal git tutorial. Emphasise judgement, not commands.
+    </aside>
+  </section>
+
+  <section>
+    <h2>What&rsquo;s worth delegating</h2>
+    <div class="cols" style="font-size:.8em;">
+      <div class="col">
+        <p><strong>Great to hand off</strong> <span class="tag safe">low risk</span></p>
+        <p>Writing commit messages &middot; staging and committing &middot; summarising history &middot; drafting a <code>.gitignore</code> &middot; explaining a diff &middot; proposing a conflict resolution.</p>
+      </div>
+      <div class="col">
+        <p><strong>Keep your hands on</strong> <span class="tag warn">high risk</span></p>
+        <p>Force-pushing &middot; deleting branches &middot; rewriting history &middot; anything touching shared <code>main</code> &middot; anything involving credentials or secrets.</p>
+      </div>
+    </div>
+    <div class="takeaway">Delegate the typing. Own the decisions that are hard to undo.</div>
+    <aside class="notes">
+      The split is by reversibility. Reversible + tedious = delegate. Irreversible or shared = you decide.
+    </aside>
+  </section>
+
+  <section data-background-color="#f4f8fb">
+    <h2>The review habit</h2>
+    <p style="font-size:.8em;">Before you accept an agent&rsquo;s Git work, do the same check you&rsquo;d do for a colleague&rsquo;s:</p>
+    <div class="cols c-3" style="font-size:.76em;">
+      <div class="card" style="--card-accent:var(--ait-amber);">
+        <h4>1. Read the diff</h4>
+        <p>&ldquo;Show me exactly what changed.&rdquo; Skim the actual lines, not just the summary.</p>
+      </div>
+      <div class="card" style="--card-accent:var(--ait-amber);">
+        <h4>2. Check the message</h4>
+        <p>Does the commit message honestly describe the change? Rewrite it if not.</p>
+      </div>
+      <div class="card" style="--card-accent:var(--ait-amber);">
+        <h4>3. Confirm the target</h4>
+        <p>Which branch? Pushed where? Never let a surprise land on shared <code>main</code>.</p>
+      </div>
+    </div>
+    <div class="safebox">Git makes this safe: because every agent action is a commit, you can always inspect it and undo it.</div>
+    <aside class="notes">
+      Three-step review. Reading the diff is non-negotiable. This is where the git mental model pays off directly.
+    </aside>
+  </section>
+
+  <section>
+    <h2>Good prompts for Git tasks</h2>
+    <div class="cols" style="font-size:.8em;">
+      <div class="col">
+        <p><span class="tag safe">Clear</span></p>
+        <p class="say">&ldquo;Stage only the changes in report.md, commit with message &lsquo;Add methods section&rsquo;, and show me the diff before pushing.&rdquo;</p>
+      </div>
+      <div class="col">
+        <p><span class="tag warn">Too vague</span></p>
+        <p class="say">&ldquo;Fix the git stuff and sort it out.&rdquo;</p>
+        <p style="font-size:.9em;">Vague prompts invite the agent to guess &mdash; and Git guesses can be hard to reverse.</p>
+      </div>
+    </div>
+    <div class="takeaway">Name the files, name the message, and ask to see the diff before anything is pushed.</div>
+    <aside class="notes">
+      Precision plus "show me before you push" is the safest delegation pattern. Model it live if presenting.
+    </aside>
+  </section>
+
+  <section data-background-color="#f4f8fb">
+    <h2>You stay responsible</h2>
+    <div class="cols" style="font-size:.84em;">
+      <div class="col">
+        <p>Your name goes on the commit. Your team relies on what lands in <code>main</code>. The agent is a fast pair of hands &mdash; the accountability is still yours.</p>
+      </div>
+      <div class="col">
+        <div class="safebox">This is why the earlier modules matter: you can only review what you understand. The mental model is what makes delegation safe.</div>
+      </div>
+    </div>
+    <aside class="notes">
+      Close the module by tying back to the thesis slide: agent does the work, human reviews before it counts.
+    </aside>
+  </section>
+
+</section>

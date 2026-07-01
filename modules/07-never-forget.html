@@ -1,0 +1,86 @@
+<section>
+
+  <section class="module-cover" data-background-color="#fbfaf6">
+    <span class="modnum">07</span>
+    <p class="kicker">Module 7</p>
+    <h1>Rules to never forget</h1>
+    <p class="lede">The handful of habits and warnings that separate confident Git users from stressed ones.</p>
+    <aside class="notes">
+      This is the "if you remember nothing else" module. Practical safety, not theory.
+    </aside>
+  </section>
+
+  <section>
+    <h2>Good habits</h2>
+    <div class="cols c-3" style="font-size:.74em;">
+      <div class="card" style="--card-accent:var(--ait-green);">
+        <h4>Commit small &amp; often</h4>
+        <p>One logical change per commit. Small commits are easy to understand and easy to undo.</p>
+      </div>
+      <div class="card" style="--card-accent:var(--ait-green);">
+        <h4>Write real messages</h4>
+        <p>&ldquo;Fix login crash on empty email&rdquo; beats &ldquo;stuff&rdquo;. Future-you reads these.</p>
+      </div>
+      <div class="card" style="--card-accent:var(--ait-green);">
+        <h4>Pull before you start</h4>
+        <p>Sync with the team first. It prevents most merge conflicts.</p>
+      </div>
+    </div>
+    <div class="takeaway">Small commits + honest messages + pull first = 90% of a smooth Git life.</div>
+    <aside class="notes">
+      These three habits prevent most pain. Commit granularity is the one people underdo.
+    </aside>
+  </section>
+
+  <section data-background-color="#f4f8fb">
+    <h2>Two things that bite</h2>
+    <div class="cols" style="font-size:.82em;">
+      <div class="col">
+        <div class="warnbox"><strong>Never commit secrets.</strong> Passwords, API keys, tokens &mdash; once pushed, treat them as leaked <em>even if you delete them later</em>, because they stay in history.</div>
+        <p style="font-size:.9em;">Use a <code>.gitignore</code> file to tell Git which files to never track (keys, <code>.env</code>, large data, build junk).</p>
+      </div>
+      <div class="col">
+        <div class="warnbox"><strong>Don&rsquo;t force-push shared branches.</strong> <code>git push --force</code> can erase teammates&rsquo; work on <code>main</code>. If you ever need it, ask first and use it only on your own branch.</div>
+      </div>
+    </div>
+    <aside class="notes">
+      Secrets-in-history is the classic disaster. Force-push on shared main is the classic team disaster. Both are avoidable.
+    </aside>
+  </section>
+
+  <section>
+    <h2>How to undo (the calm menu)</h2>
+    <p style="font-size:.8em;">Almost nothing in Git is truly lost. Match the situation to the fix:</p>
+    <div class="cmd-list">
+      <div class="cmd-row"><code>git restore &lt;file&gt;</code><span>Throw away un-staged edits to a file &mdash; back to last commit.</span></div>
+      <div class="cmd-row"><code>git restore --staged &lt;file&gt;</code><span>Un-stage something you added by mistake.</span></div>
+      <div class="cmd-row"><code>git commit --amend</code><span>Fix the <em>last</em> commit&rsquo;s message or contents (before pushing).</span></div>
+      <div class="cmd-row"><code>git revert &lt;commit&gt;</code><span>Safely undo an <em>already-pushed</em> commit by adding an opposite one.</span></div>
+    </div>
+    <div class="safebox"><strong>Rule of thumb:</strong> <code>revert</code> for anything already shared (it&rsquo;s safe); <code>restore</code>/<code>amend</code> for local, not-yet-pushed work.</div>
+    <aside class="notes">
+      revert vs reset: teach revert (safe, adds a commit) for shared history; avoid reset --hard for beginners.
+    </aside>
+  </section>
+
+  <section data-background-color="#f4f8fb">
+    <h2>Undoing &mdash; both ways</h2>
+    <div class="ha-grid">
+      <div class="ha-panel human">
+        <span class="ha-label">You (human)</span>
+        <pre><code class="language-bash">git log --oneline      # find the bad commit
+git revert a1b2c3d      # undo it safely</code></pre>
+      </div>
+      <div class="ha-panel agent">
+        <span class="ha-label">Ask the agent</span>
+        <p class="say">&ldquo;My last commit broke things &mdash; revert it and explain what you did.&rdquo;</p>
+        <p>The agent finds the commit and reverts it. You confirm the right one was undone.</p>
+      </div>
+    </div>
+    <div class="takeaway">When something breaks: don&rsquo;t panic, don&rsquo;t delete files. Ask &ldquo;what changed?&rdquo;, then revert.</div>
+    <aside class="notes">
+      The emotional message: git means mistakes are recoverable. Reverting is a normal daily action, not a failure.
+    </aside>
+  </section>
+
+</section>

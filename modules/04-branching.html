@@ -1,0 +1,79 @@
+<section>
+
+  <section class="module-cover" data-background-color="#fbfaf6">
+    <span class="modnum">04</span>
+    <p class="kicker">Module 4</p>
+    <h1>Branching &amp; merging</h1>
+    <p class="lede">How to try something new without risking the version that already works.</p>
+    <aside class="notes">
+      Branching is what makes git feel safe for teams and for experiments. Keep it concrete.
+    </aside>
+  </section>
+
+  <section>
+    <h2>What a branch is for</h2>
+    <div class="cols" style="font-size:.82em;">
+      <div class="col">
+        <p>Your working version lives on a branch, usually called <code>main</code>. You want <code>main</code> to always work.</p>
+        <p>To try a change, you <strong>branch off</strong>: make a parallel copy, experiment there, and only bring it back to <code>main</code> when it&rsquo;s good.</p>
+      </div>
+      <div class="col">
+        <div class="safebox">If the experiment fails, you just delete the branch. <code>main</code> never knew it existed.</div>
+        <p style="font-size:.9em;">This is why teams can work in parallel: everyone on their own branch, merging in when ready.</p>
+      </div>
+    </div>
+    <aside class="notes">
+      The mental image: main is the trunk, branches are side experiments that either merge back or get thrown away.
+    </aside>
+  </section>
+
+  <section data-background-color="#f4f8fb">
+    <h2>Branching &mdash; both ways</h2>
+    <div class="ha-grid">
+      <div class="ha-panel human">
+        <span class="ha-label">You (human)</span>
+        <pre><code class="language-bash">git switch -c new-feature   # create + move to it
+# ...edit, add, commit as usual...
+git switch main             # go back
+git merge new-feature       # bring the work in</code></pre>
+      </div>
+      <div class="ha-panel agent">
+        <span class="ha-label">Ask the agent</span>
+        <p class="say">&ldquo;Make a branch called new-feature and work there.&rdquo;</p>
+        <p class="say">&ldquo;Merge new-feature back into main.&rdquo;</p>
+        <p>The agent runs the same switch / merge commands.</p>
+      </div>
+    </div>
+    <p class="footnote"><code>git switch</code> is the modern command; you may also see <code>git checkout</code> do the same job.</p>
+    <aside class="notes">
+      Create-and-switch is one flag: -c. Merge happens from the branch you want to receive the changes (main).
+    </aside>
+  </section>
+
+  <section>
+    <h2>Merge conflicts &mdash; not scary</h2>
+    <div class="cols" style="font-size:.82em;">
+      <div class="col">
+        <p>A conflict happens when two branches changed the <strong>same lines</strong>. Git can&rsquo;t guess which to keep, so it asks you.</p>
+        <p>It marks the spot in the file:</p>
+        <pre><code class="language-text">&lt;&lt;&lt;&lt;&lt;&lt;&lt; your version
+hello world
+=======
+hello there
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; their version</code></pre>
+      </div>
+      <div class="col">
+        <p>You edit the file to the version you want, delete the marker lines, then <code>git add</code> and <code>git commit</code>.</p>
+        <div class="ha-panel agent" style="margin-top:.4em;">
+          <span class="ha-label">Ask the agent</span>
+          <p class="say">&ldquo;Resolve this merge conflict, keeping both changes where sensible, and explain what you did.&rdquo;</p>
+        </div>
+      </div>
+    </div>
+    <div class="takeaway">A conflict is just Git asking a question. Agents are good at proposing a resolution &mdash; you confirm it&rsquo;s right.</div>
+    <aside class="notes">
+      Demystify conflicts: they're normal, they're local, nothing is lost. This is a great task to delegate then review.
+    </aside>
+  </section>
+
+</section>

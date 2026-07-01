@@ -1,0 +1,155 @@
+(() => {
+  const nextTokenExamples = {
+    "The satellite detected": [
+      { name: "cloud cover", value: .34 },
+      { name: "heat plumes", value: .24 },
+      { name: "movement", value: .19 },
+      { name: "a signal", value: .14 },
+      { name: "nothing", value: .09 }
+    ],
+    "The grant proposal needs": [
+      { name: "evidence", value: .31 },
+      { name: "a budget", value: .25 },
+      { name: "revision", value: .19 },
+      { name: "partners", value: .15 },
+      { name: "clarity", value: .10 }
+    ],
+    "To verify the result": [
+      { name: "compare", value: .30 },
+      { name: "rerun", value: .24 },
+      { name: "inspect", value: .20 },
+      { name: "cite", value: .15 },
+      { name: "log", value: .11 }
+    ],
+    "The old archive contains": [
+      { name: "letters", value: .29 },
+      { name: "metadata", value: .25 },
+      { name: "maps", value: .18 },
+      { name: "duplicates", value: .16 },
+      { name: "gaps", value: .12 }
+    ]
+  };
+
+  function normalise(values) {
+    const sum = values.reduce((acc, v) => acc + v, 0);
+    return values.map((v) => v / sum);
+  }
+
+  function renderBars(root, items) {
+    const list = root.querySelector(".bar-list");
+    if (!list) return;
+    list.innerHTML = "";
+    items.forEach(({ name, value }) => {
+      const row = document.createElement("div");
+      row.className = "bar-row";
+      row.innerHTML = `
+        <span class="name">${name}</span>
+        <span class="bar-shell"><span class="bar-fill" style="width:${Math.max(2, value * 100)}%"></span></span>
+        <span class="value">${Math.round(value * 100)}%</span>
+      `;
+      list.appendChild(row);
+    });
+  }
+
+  function renderTempCurve(root, probs, names) {
+    const svg = root.querySelector("[data-temp-distribution]");
+    if (!svg) return;
+    const width = 520;
+    const padX = 54;
+    const baseY = 132;
+    const topY = 26;
+    const usableW = width - padX * 2;
+    const maxP = Math.max(...probs, 0.01);
+    const points = probs.map((p, i) => {
+      const x = padX + (usableW * i) / (probs.length - 1);
+      const y = baseY - (p / maxP) * 86;
+      return [x, y];
+    });
+    const smooth = points.map(([x, y], i) => {
+      if (i === 0) return `M ${x} ${y}`;
+      const [px, py] = points[i - 1];
+      const cx = (px + x) / 2;
+      return `C ${cx} ${py}, ${cx} ${y}, ${x} ${y}`;
+    }).join(" ");
+    const area = `${smooth} L ${points.at(-1)[0]} ${baseY} L ${points[0][0]} ${baseY} Z`;
+    svg.innerHTML = `
+      <line class="axis-line" x1="${padX}" y1="${baseY}" x2="${width - 24}" y2="${baseY}" stroke-width="1.4"/>
+      <line class="axis-line" x1="${padX}" y1="${baseY}" x2="${padX}" y2="${topY}" stroke-width="1.4"/>
+      <text class="axis-label" x="${padX - 10}" y="${topY + 4}" text-anchor="end">probability</text>
+      <text class="axis-label" x="${width - 26}" y="179" text-anchor="end">candidate token</text>
+      <path d="${area}"></path>
+      ${points.map(([x, y], i) => `<circle cx="${x}" cy="${y}" r="${i === 0 ? 5 : 4}" fill="${i === 0 ? "var(--ait-amber)" : "var(--ait-cyan)"}"></circle>`).join("")}
+      ${points.map(([x], i) => `<text class="temp-word" x="${x}" y="162" text-anchor="middle">${names[i]}</text>`).join("")}
+    `;
+  }
+
+  function initNextToken() {
+    document.querySelectorAll("[data-next-token-widget]").forEach((root) => {
+      const buttons = [...root.querySelectorAll("button[data-prompt]")];
+      const display = root.querySelector("[data-prompt-text]");
+      const update = (prompt) => {
+        buttons.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.prompt === prompt)));
+        if (display) display.textContent = prompt;
+        renderBars(root, nextTokenExamples[prompt] || []);
+      };
+      buttons.forEach((button) => button.addEventListener("click", () => update(button.dataset.prompt)));
+      update(buttons[0]?.dataset.prompt || Object.keys(nextTokenExamples)[0]);
+    });
+  }
+
+  function splitBareWord(word) {
+    const lower = word.toLowerCase();
+    const suffixes = ["isation", "ization", "ability", "mente", "enza", "tion", "ment", "ing", "ed", "ly", "s"];
+    const suffix = suffixes.find((part) => lower.endsWith(part) && word.length > part.length + 3);
+    if (suffix) {
+      const cut = word.length - suffix.length;
+      return [
+        { text: word.slice(0, cut), kind: "token", reason: "Common prefix kept as one piece." },
+        { text: word.slice(cut), kind: "subword", reason: "Common suffix split as a sub-word piece." }
+      ];
+    }
+    if (word.length > 9) {
+      const cut = Math.ceil(word.length / 2);
+      return [
+        { text: word.slice(0, cut), kind: "token", reason: "Long word split into a reusable first piece." },
+        { text: word.slice(cut), kind: "subword", reason: "Remainder becomes a continuation piece." }
+      ];
+    }
+    return [{ text: word, kind: "token", reason: "Frequent short word can stay as one token." }];
+  }
+
+  function teachingTokenize(text) {
+    const pieces = [];
+    const matches = text.matchAll(/(\s+|[A-Za-zÀ-ÿ']+|\d+(?:[.,]\d+)*|[^\sA-Za-zÀ-ÿ0-9])/g);
+    let leadingSpace = false;
+    for (const match of matches) {
+      const value = match[0];
+      if (/^\s+$/.test(value)) {
+        leadingSpace = true;
+        continue;
+      }
+      if (/^\d/.test(value)) {
+        pieces.push({ text: value, kind: "subword", reason: "Numbers are often grouped by digit pattern.", leadingSpace });
+      } else if (/^[^\sA-Za-zÀ-ÿ0-9]$/.test(value)) {
+        pieces.push({ text: value, kind: "boundary", reason: "Punctuation often becomes its own boundary token.", leadingSpace });
+      } else if (value.includes("'")) {
+        const [left, ...rest] = value.split("'");
+        const right = rest.join("'");
+        if (left) pieces.push({ text: `${left}'`, kind: "boundary", reason: "Apostrophe boundary can split from the following word.", leadingSpace });
+        splitBareWord(right).forEach((piece, index) => {
+          pieces.push({ ...piece, leadingSpace: index === 0 ? false : piece.leadingSpace });
+        });
+      } else {
+        splitBareWord(value).forEach((piece, index) => {
+          pieces.push({ ...piece, leadingSpace: index === 0 ? leadingSpace : false });
+        });
+      }
+      leadingSpace = false;
+    }
+    return pieces;
+  }
+
+  function initTokenizerWidget() {
+    document.querySelectorAll("[data-tokenizer-widget]").forEach((root) => {
+      const input = root.querySelector(".tokenizer-input");
+ 

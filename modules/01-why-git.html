@@ -1,0 +1,74 @@
+<section>
+
+  <section class="module-cover" data-background-color="#fbfaf6">
+    <span class="modnum">01</span>
+    <p class="kicker">Module 1</p>
+    <h1>Why Git is worth it</h1>
+    <p class="lede">Before the commands: what problem does it actually solve, and why do people who use it never go back?</p>
+    <aside class="notes">
+      Motivation first. If people feel the pain git removes, the commands later feel worth learning.
+    </aside>
+  </section>
+
+  <section>
+    <h2>The problem without Git</h2>
+    <div class="cols">
+      <div class="col" style="font-size:.82em;">
+        <p>You know this file folder:</p>
+        <pre><code class="language-text">report_final.docx
+report_final_v2.docx
+report_final_REAL.docx
+report_final_use-this-one.docx</code></pre>
+        <p>It breaks down the moment you need to answer: <em>what changed, when, and can I get the old version back?</em></p>
+      </div>
+      <div class="col" style="font-size:.82em;">
+        <p>And with two people editing, it gets worse: whose copy is right? Which changes got lost when you emailed versions back and forth?</p>
+        <div class="warnbox">Manual versioning fails silently. You only notice when something is already lost.</div>
+      </div>
+    </div>
+    <aside class="notes">
+      Everyone recognises the "_final_final" pattern. This is the emotional hook.
+    </aside>
+  </section>
+
+  <section data-background-color="#f4f8fb">
+    <h2>What Git gives you instead</h2>
+    <div class="cols c-3" style="font-size:.8em;">
+      <div class="card" style="--card-accent:var(--ait-amber);">
+        <h4>A time machine</h4>
+        <p>Every saved snapshot is recoverable. Broke something an hour ago? Go back to exactly how it was.</p>
+      </div>
+      <div class="card" style="--card-accent:var(--ait-green);">
+        <h4>A safety net</h4>
+        <p>Experiment freely. If it goes wrong, you throw the change away &mdash; the last good version is untouched.</p>
+      </div>
+      <div class="card" style="--card-accent:var(--ait-violet);">
+        <h4>A team workflow</h4>
+        <p>Many people change the same project at once, and Git merges the work and flags real conflicts.</p>
+      </div>
+    </div>
+    <div class="takeaway">Git turns &ldquo;don&rsquo;t touch it, it works&rdquo; into &ldquo;try anything, we can always go back.&rdquo;</div>
+    <aside class="notes">
+      Three benefits: recover, experiment safely, collaborate. Confidence to change things is the real payoff.
+    </aside>
+  </section>
+
+  <section>
+    <h2>Why it matters more in the age of agents</h2>
+    <div class="cols" style="font-size:.82em;">
+      <div class="col">
+        <p>An AI agent can change dozens of files in seconds. That is powerful &mdash; and risky if you can&rsquo;t see or undo what it did.</p>
+        <p>Git is what makes agent help <strong>safe to accept</strong>: every change is a reviewable snapshot you can inspect, keep, or throw away.</p>
+      </div>
+      <div class="col">
+        <div class="safebox"><strong>With Git:</strong> &ldquo;Show me exactly what you changed&rdquo; and &ldquo;undo that&rdquo; are one command away.</div>
+        <div class="warnbox"><strong>Without Git:</strong> an agent&rsquo;s edits overwrite your files with no record and no undo.</div>
+      </div>
+    </div>
+    <div class="takeaway">Git is the seatbelt for working with agents. It doesn&rsquo;t slow you down &mdash; it lets you go faster safely.</div>
+    <aside class="notes">
+      Tie motivation to the deck's theme: agents make version control non-optional, because they change a lot fast.
+    </aside>
+  </section>
+
+</section>

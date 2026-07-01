@@ -1,0 +1,92 @@
+<section>
+
+  <section class="module-cover" data-background-color="#fbfaf6">
+    <span class="modnum">05</span>
+    <p class="kicker">Module 5</p>
+    <h1>GitHub</h1>
+    <p class="lede">Git lives on your computer. GitHub is the shared home online where teams meet.</p>
+    <aside class="notes">
+      Draw the line clearly: Git = the tool, GitHub = a website that hosts Git repos and adds collaboration features.
+    </aside>
+  </section>
+
+  <section>
+    <h2>Git vs GitHub &mdash; the one distinction people mix up</h2>
+    <div class="cols" style="font-size:.82em;">
+      <div class="col">
+        <div class="card" style="--card-accent:var(--ait-cyan);">
+          <h4>Git</h4>
+          <p>The version-control <strong>tool</strong> on your machine. Works fully offline. Made by no single company.</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card" style="--card-accent:var(--ait-violet);">
+          <h4>GitHub</h4>
+          <p>A <strong>website</strong> that hosts Git repos in the cloud and adds sharing, review, and issue tracking. (GitLab and Bitbucket are alternatives.)</p>
+        </div>
+      </div>
+    </div>
+    <div class="takeaway">You can use Git with no GitHub. GitHub is where Git repos go to be shared and collaborated on.</div>
+    <aside class="notes">
+      Analogy: Git is like a camera (takes snapshots); GitHub is like a shared photo album online. Optional but very common.
+    </aside>
+  </section>
+
+  <section data-background-color="#f4f8fb">
+    <h2>The GitHub connection</h2>
+    <p style="font-size:.8em;">Your local repo talks to GitHub through two commands you already met:</p>
+    <div class="cmd-list">
+      <div class="cmd-row"><code>git clone &lt;url&gt;</code><span>Copy a GitHub repo (with history) down to your machine.</span></div>
+      <div class="cmd-row"><code>git push</code><span>Send your local commits up to GitHub for others to see.</span></div>
+      <div class="cmd-row"><code>git pull</code><span>Bring down what others pushed. Do this before starting work.</span></div>
+    </div>
+    <div class="safebox" style="font-size:.9em;">Golden habit: <strong>pull before you start, push when you pause.</strong> It keeps you and your team in sync and avoids most conflicts.</div>
+    <aside class="notes">
+      clone once, then push/pull forever. The pull-first habit prevents the majority of merge headaches.
+    </aside>
+  </section>
+
+  <section>
+    <h2>Pull requests: how changes get reviewed</h2>
+    <div class="cols" style="font-size:.8em;">
+      <div class="col">
+        <p>A <strong>pull request (PR)</strong> is how you propose merging your branch into <code>main</code> on GitHub. It says: &ldquo;here&rsquo;s my work &mdash; please review before it goes in.&rdquo;</p>
+        <p>Teammates comment, request changes, and approve. Then the branch is merged through the GitHub button.</p>
+      </div>
+      <div class="col">
+        <p><strong>Also on GitHub:</strong></p>
+        <p style="font-size:.92em;"><span class="tag">Issues</span> a to-do / bug list for the project.<br>
+        <span class="tag">Fork</span> your own copy of someone else&rsquo;s repo to build on.<br>
+        <span class="tag">README</span> the front-page description of the repo.</p>
+      </div>
+    </div>
+    <div class="takeaway">A pull request is a review checkpoint. It&rsquo;s the same &ldquo;human approves before it counts&rdquo; idea, for teams.</div>
+    <aside class="notes">
+      PR = propose + review + merge. Connect it to the deck's theme: review before it counts, whether the author was a human or an agent.
+    </aside>
+  </section>
+
+  <section data-background-color="#f4f8fb">
+    <h2>Working with GitHub &mdash; both ways</h2>
+    <div class="ha-grid">
+      <div class="ha-panel human">
+        <span class="ha-label">You (human)</span>
+        <pre><code class="language-bash">git clone https://github.com/team/app.git
+git switch -c fix-typo
+# edit, commit
+git push -u origin fix-typo</code></pre>
+        <p>Then open a pull request on the GitHub website.</p>
+      </div>
+      <div class="ha-panel agent">
+        <span class="ha-label">Ask the agent</span>
+        <p class="say">&ldquo;Clone team/app, make a branch, fix the typo, push it, and open a pull request.&rdquo;</p>
+        <p>Agents with GitHub access can do the whole flow &mdash; you review the PR before merging.</p>
+      </div>
+    </div>
+    <p class="footnote">Pushing usually requires a one-time login (a token or SSH key). An agent may ask you to set this up once.</p>
+    <aside class="notes">
+      Note the auth reality: first push needs credentials. This is the one setup snag beginners hit.
+    </aside>
+  </section>
+
+</section>

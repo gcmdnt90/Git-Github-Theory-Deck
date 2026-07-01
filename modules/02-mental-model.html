@@ -1,0 +1,91 @@
+<section>
+
+  <section class="module-cover" data-background-color="#fbfaf6">
+    <span class="modnum">02</span>
+    <p class="kicker">Module 2</p>
+    <h1>The mental model</h1>
+    <p class="lede">Six words unlock almost everything in Git. Learn what they mean and the commands stop feeling random.</p>
+    <aside class="notes">
+      The single biggest reason git feels confusing is people learn commands before the model. Fix that here.
+    </aside>
+  </section>
+
+  <section>
+    <h2>The six words</h2>
+    <div class="cols c-3" style="font-size:.74em;">
+      <div class="card" style="--card-accent:var(--ait-cyan);">
+        <h4>Repository (repo)</h4>
+        <p>Your project folder, plus its entire history. Created once with <code>git init</code> or by cloning.</p>
+      </div>
+      <div class="card">
+        <h4>Working directory</h4>
+        <p>The actual files as they are right now on your computer, where you edit.</p>
+      </div>
+      <div class="card" style="--card-accent:var(--ait-amber);">
+        <h4>Staging area</h4>
+        <p>A holding tray. You pick which changes go into the next snapshot before you commit.</p>
+      </div>
+      <div class="card" style="--card-accent:var(--ait-green);">
+        <h4>Commit</h4>
+        <p>A saved snapshot with a message. The permanent, recoverable unit of history.</p>
+      </div>
+      <div class="card" style="--card-accent:var(--ait-violet);">
+        <h4>Branch</h4>
+        <p>A movable line of commits. Lets you work on something without touching the main version.</p>
+      </div>
+      <div class="card" style="--card-accent:var(--ait-violet);">
+        <h4>Remote</h4>
+        <p>A copy of the repo somewhere else &mdash; usually GitHub &mdash; that you push to and pull from.</p>
+      </div>
+    </div>
+    <aside class="notes">
+      Read them once slowly. Staging is the one newcomers miss; it's why commit is two steps (add, then commit).
+    </aside>
+  </section>
+
+  <section data-background-color="#f4f8fb">
+    <h2>How a change travels</h2>
+    <p style="font-size:.8em;">A change moves through four places. Each git command just moves it one step along:</p>
+    <div class="flow-boxes">
+      <div class="flow-box">
+        <span class="fb-name">Working dir</span>
+        <span class="fb-sub">you edit a file</span>
+      </div>
+      <div class="flow-box">
+        <span class="fb-name">Staging</span>
+        <span class="fb-sub"><code>git add</code></span>
+      </div>
+      <div class="flow-box">
+        <span class="fb-name">Local repo</span>
+        <span class="fb-sub"><code>git commit</code></span>
+      </div>
+      <div class="flow-box">
+        <span class="fb-name">Remote (GitHub)</span>
+        <span class="fb-sub"><code>git push</code></span>
+      </div>
+    </div>
+    <p class="footnote">And it comes back the other way with <code>git pull</code> when someone else pushed changes.</p>
+    <div class="takeaway">Almost every command you&rsquo;ll learn is just &ldquo;move this change one box to the right (or left).&rdquo;</div>
+    <aside class="notes">
+      This diagram is the spine of the whole deck. Point at it again in module 3. add = stage, commit = save locally,
+      push = send to GitHub, pull = receive from GitHub.
+    </aside>
+  </section>
+
+  <section>
+    <h2>Does the agent need a different model? No.</h2>
+    <div class="cols" style="font-size:.82em;">
+      <div class="col">
+        <p>When you ask an agent to &ldquo;save this and push it,&rdquo; it walks the exact same four boxes: it stages, commits, and pushes.</p>
+        <p>So this one diagram lets you <strong>check the agent&rsquo;s work</strong>. If it says &ldquo;committed and pushed,&rdquo; you know precisely what that means and where your change now lives.</p>
+      </div>
+      <div class="col">
+        <div class="safebox">Understanding the model is what turns you from &ldquo;hoping it worked&rdquo; into &ldquo;knowing it worked.&rdquo;</div>
+      </div>
+    </div>
+    <aside class="notes">
+      Reinforce: the mental model is the shared language between you and the agent. It's not extra work, it's leverage.
+    </aside>
+  </section>
+
+</section>

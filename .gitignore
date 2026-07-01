@@ -1,0 +1,13 @@
+# OS / editor junk
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# logs & scratch
+*.log
+__*.txt
+__t2
+
+# node
+node_modules/

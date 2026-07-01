@@ -1,0 +1,76 @@
+<section>
+
+  <section class="module-cover" data-background-color="#fbfaf6">
+    <span class="modnum">08</span>
+    <p class="kicker">Module 8</p>
+    <h1>The cheat sheet</h1>
+    <p class="lede">One page to keep. If you internalise this slide, you can use Git for real work today.</p>
+    <aside class="notes">
+      This is the takeaway artefact. Tell people to screenshot it. Everything here appeared earlier in context.
+    </aside>
+  </section>
+
+  <section>
+    <h2>The commands you actually use</h2>
+    <div class="cols" style="font-size:.72em;">
+      <div class="col">
+        <p><strong>Daily loop</strong></p>
+        <div class="cmd-list">
+          <div class="cmd-row"><code>git status</code><span>what changed</span></div>
+          <div class="cmd-row"><code>git add .</code><span>stage everything</span></div>
+          <div class="cmd-row"><code>git commit -m "..."</code><span>save a snapshot</span></div>
+          <div class="cmd-row"><code>git push</code><span>send to GitHub</span></div>
+          <div class="cmd-row"><code>git pull</code><span>get others&rsquo; work</span></div>
+        </div>
+      </div>
+      <div class="col">
+        <p><strong>Look &amp; branch &amp; undo</strong></p>
+        <div class="cmd-list">
+          <div class="cmd-row"><code>git diff</code><span>which lines changed</span></div>
+          <div class="cmd-row"><code>git log --oneline</code><span>history</span></div>
+          <div class="cmd-row"><code>git switch -c name</code><span>new branch</span></div>
+          <div class="cmd-row"><code>git merge name</code><span>bring branch in</span></div>
+          <div class="cmd-row"><code>git revert &lt;id&gt;</code><span>undo a pushed commit</span></div>
+        </div>
+      </div>
+    </div>
+    <aside class="notes">
+      Ten commands. This really is enough for the vast majority of daily work.
+    </aside>
+  </section>
+
+  <section data-background-color="#f4f8fb">
+    <h2>The rules, in one breath</h2>
+    <div class="cols" style="font-size:.8em;">
+      <div class="col">
+        <p class="say" style="background:rgba(52,149,111,.09);"><strong>Do:</strong> commit small &amp; often &middot; write honest messages &middot; pull before you start &middot; read the diff before you accept &middot; use <code>.gitignore</code>.</p>
+      </div>
+      <div class="col">
+        <p class="say" style="background:rgba(201,75,75,.09);"><strong>Don&rsquo;t:</strong> commit secrets &middot; force-push shared branches &middot; let an agent&rsquo;s change land on <code>main</code> unreviewed &middot; panic &mdash; almost nothing is truly lost.</p>
+      </div>
+    </div>
+    <div class="takeaway">Snapshots you can trust, branches to experiment, a remote to share &mdash; and a human who reviews before it counts.</div>
+    <aside class="notes">
+      The do/don't pairing is the safety summary. Close on the thesis sentence one more time.
+    </aside>
+  </section>
+
+  <section>
+    <h2>Working with your agent, summed up</h2>
+    <div class="ha-grid">
+      <div class="ha-panel human">
+        <span class="ha-label">Your job</span>
+        <p style="color:var(--ait-ink);font-size:.72em;">Understand the model. Decide what to change. Review the diff. Own what lands.</p>
+      </div>
+      <div class="ha-panel agent">
+        <span class="ha-label">The agent&rsquo;s job</span>
+        <p style="color:var(--ait-ink);font-size:.72em;">Run the commands. Draft messages. Explain history. Propose fixes and conflict resolutions.</p>
+      </div>
+    </div>
+    <div class="takeaway">You bring judgement; the agent brings speed. Git is the shared, reviewable record between you.</div>
+    <aside class="notes">
+      Final framing. This division of labour is the whole point of the module.
+    </aside>
+  </section>
+
+</section>
