@@ -1,6 +1,6 @@
 <section>
 
-  <section class="module-cover" data-background-color="#fbfaf6">
+  <section class="module-cover mod-01" data-background-color="#fbfaf6">
     <span class="modnum">01</span>
     <p class="kicker">Module 1</p>
     <h1>Why Git is worth it</h1>
@@ -11,14 +11,16 @@
   </section>
 
   <section>
-    <h2>The problem without Git</h2>
+    <h2>File-name versioning breaks silently</h2>
     <div class="cols">
       <div class="col" style="font-size:.82em;">
         <p>You know this file folder:</p>
-        <pre><code class="language-text">report_final.docx
-report_final_v2.docx
-report_final_REAL.docx
-report_final_use-this-one.docx</code></pre>
+        <div class="file-stack" aria-hidden="true">
+          <div class="file-card">report_final.docx</div>
+          <div class="file-card">report_final_v2.docx</div>
+          <div class="file-card">report_final_REAL.docx</div>
+          <div class="file-card">report_final_use-this-one.docx</div>
+        </div>
         <p>It breaks down the moment you need to answer: <em>what changed, when, and can I get the old version back?</em></p>
       </div>
       <div class="col" style="font-size:.82em;">
@@ -32,7 +34,7 @@ report_final_use-this-one.docx</code></pre>
   </section>
 
   <section data-background-color="#f4f8fb">
-    <h2>What Git gives you instead</h2>
+    <h2>Git makes change recoverable</h2>
     <div class="cols c-3" style="font-size:.8em;">
       <div class="card" style="--card-accent:var(--ait-amber);">
         <h4>A time machine</h4>
@@ -54,15 +56,15 @@ report_final_use-this-one.docx</code></pre>
   </section>
 
   <section>
-    <h2>Why it matters more in the age of agents</h2>
+    <h2>Agents make version control non-optional</h2>
     <div class="cols" style="font-size:.82em;">
       <div class="col">
         <p>An AI agent can change dozens of files in seconds. That is powerful &mdash; and risky if you can&rsquo;t see or undo what it did.</p>
-        <p>Git is what makes agent help <strong>safe to accept</strong>: every change is a reviewable snapshot you can inspect, keep, or throw away.</p>
+        <p>Git is what makes agent help <strong>safe to accept</strong>: you can inspect the diff, save the good work as a commit, and throw away the rest.</p>
       </div>
       <div class="col">
         <div class="safebox"><strong>With Git:</strong> &ldquo;Show me exactly what you changed&rdquo; and &ldquo;undo that&rdquo; are one command away.</div>
-        <div class="warnbox"><strong>Without Git:</strong> an agent&rsquo;s edits overwrite your files with no record and no undo.</div>
+        <div class="warnbox"><strong>Without Git:</strong> an agent&rsquo;s edits can overwrite files with no reliable record of what changed.</div>
       </div>
     </div>
     <div class="takeaway">Git is the seatbelt for working with agents. It doesn&rsquo;t slow you down &mdash; it lets you go faster safely.</div>

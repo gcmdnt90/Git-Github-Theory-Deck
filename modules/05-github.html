@@ -1,6 +1,6 @@
 <section>
 
-  <section class="module-cover" data-background-color="#fbfaf6">
+  <section class="module-cover mod-05" data-background-color="#fbfaf6">
     <span class="modnum">05</span>
     <p class="kicker">Module 5</p>
     <h1>GitHub</h1>
@@ -11,12 +11,12 @@
   </section>
 
   <section>
-    <h2>Git vs GitHub &mdash; the one distinction people mix up</h2>
+    <h2>Git is the tool; GitHub is the shared place</h2>
     <div class="cols" style="font-size:.82em;">
       <div class="col">
         <div class="card" style="--card-accent:var(--ait-cyan);">
           <h4>Git</h4>
-          <p>The version-control <strong>tool</strong> on your machine. Works fully offline. Made by no single company.</p>
+          <p>The version-control <strong>tool</strong> on your machine. Works fully offline and is not owned by GitHub.</p>
         </div>
       </div>
       <div class="col">
@@ -33,21 +33,31 @@
   </section>
 
   <section data-background-color="#f4f8fb">
-    <h2>The GitHub connection</h2>
-    <p style="font-size:.8em;">Your local repo talks to GitHub through two commands you already met:</p>
-    <div class="cmd-list">
-      <div class="cmd-row"><code>git clone &lt;url&gt;</code><span>Copy a GitHub repo (with history) down to your machine.</span></div>
-      <div class="cmd-row"><code>git push</code><span>Send your local commits up to GitHub for others to see.</span></div>
-      <div class="cmd-row"><code>git pull</code><span>Bring down what others pushed. Do this before starting work.</span></div>
+    <h2>Your local repo and GitHub stay in sync</h2>
+    <div class="cols top" style="font-size:.8em;">
+      <div class="col">
+        <p>Your local repo talks to GitHub through three commands you already met:</p>
+        <div class="cmd-list">
+          <div class="cmd-row"><code>git clone &lt;url&gt;</code><span>Copy a GitHub repo (with history) down to your machine.</span></div>
+          <div class="cmd-row"><code>git push</code><span>Send your local commits up to GitHub for others to see.</span></div>
+          <div class="cmd-row"><code>git pull</code><span>Bring down what others pushed. Do this before starting work.</span></div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="remote-flow" aria-hidden="true">
+          <div class="remote-node"><strong>Local repo</strong><span>your machine</span></div>
+          <div class="remote-node"><strong>GitHub</strong><span>shared remote</span></div>
+        </div>
+        <div class="safebox" style="font-size:.9em;">Golden habit: <strong>pull before you start, push when you pause.</strong> It keeps you and your team in sync and avoids most conflicts.</div>
+      </div>
     </div>
-    <div class="safebox" style="font-size:.9em;">Golden habit: <strong>pull before you start, push when you pause.</strong> It keeps you and your team in sync and avoids most conflicts.</div>
     <aside class="notes">
       clone once, then push/pull forever. The pull-first habit prevents the majority of merge headaches.
     </aside>
   </section>
 
   <section>
-    <h2>Pull requests: how changes get reviewed</h2>
+    <h2>Pull requests are review checkpoints</h2>
     <div class="cols" style="font-size:.8em;">
       <div class="col">
         <p>A <strong>pull request (PR)</strong> is how you propose merging your branch into <code>main</code> on GitHub. It says: &ldquo;here&rsquo;s my work &mdash; please review before it goes in.&rdquo;</p>
@@ -67,7 +77,7 @@
   </section>
 
   <section data-background-color="#f4f8fb">
-    <h2>Working with GitHub &mdash; both ways</h2>
+    <h2>A branch becomes a pull request</h2>
     <div class="ha-grid">
       <div class="ha-panel human">
         <span class="ha-label">You (human)</span>
@@ -80,7 +90,7 @@ git push -u origin fix-typo</code></pre>
       <div class="ha-panel agent">
         <span class="ha-label">Ask the agent</span>
         <p class="say">&ldquo;Clone team/app, make a branch, fix the typo, push it, and open a pull request.&rdquo;</p>
-        <p>Agents with GitHub access can do the whole flow &mdash; you review the PR before merging.</p>
+        <p>Agents with configured GitHub access can do the whole flow &mdash; you review the PR before merging.</p>
       </div>
     </div>
     <p class="footnote">Pushing usually requires a one-time login (a token or SSH key). An agent may ask you to set this up once.</p>

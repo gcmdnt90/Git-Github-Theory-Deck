@@ -1,6 +1,6 @@
 <section>
 
-  <section class="module-cover" data-background-color="#fbfaf6">
+  <section class="module-cover mod-06" data-background-color="#fbfaf6">
     <span class="modnum">06</span>
     <p class="kicker">Module 6</p>
     <h1>Working with agents</h1>
@@ -11,7 +11,7 @@
   </section>
 
   <section>
-    <h2>What&rsquo;s worth delegating</h2>
+    <h2>Delegate reversible Git work</h2>
     <div class="cols" style="font-size:.8em;">
       <div class="col">
         <p><strong>Great to hand off</strong> <span class="tag safe">low risk</span></p>
@@ -29,30 +29,30 @@
   </section>
 
   <section data-background-color="#f4f8fb">
-    <h2>The review habit</h2>
+    <h2>Review the diff before it counts</h2>
     <p style="font-size:.8em;">Before you accept an agent&rsquo;s Git work, do the same check you&rsquo;d do for a colleague&rsquo;s:</p>
-    <div class="cols c-3" style="font-size:.76em;">
-      <div class="card" style="--card-accent:var(--ait-amber);">
-        <h4>1. Read the diff</h4>
-        <p>&ldquo;Show me exactly what changed.&rdquo; Skim the actual lines, not just the summary.</p>
+    <div class="review-loop">
+      <div class="review-step">
+        <strong>1. Read the diff</strong>
+        <span>&ldquo;Show me exactly what changed.&rdquo; Skim the actual lines, not just the summary.</span>
       </div>
-      <div class="card" style="--card-accent:var(--ait-amber);">
-        <h4>2. Check the message</h4>
-        <p>Does the commit message honestly describe the change? Rewrite it if not.</p>
+      <div class="review-step">
+        <strong>2. Check the message</strong>
+        <span>Does the commit message honestly describe the change? Rewrite it if not.</span>
       </div>
-      <div class="card" style="--card-accent:var(--ait-amber);">
-        <h4>3. Confirm the target</h4>
-        <p>Which branch? Pushed where? Never let a surprise land on shared <code>main</code>.</p>
+      <div class="review-step">
+        <strong>3. Confirm the target</strong>
+        <span>Which branch? Pushed where? Never let a surprise land on shared <code>main</code>.</span>
       </div>
     </div>
-    <div class="safebox">Git makes this safe: because every agent action is a commit, you can always inspect it and undo it.</div>
+    <div class="safebox">Git makes this safe when you turn the agent&rsquo;s work into a commit: you can inspect that checkpoint and undo it.</div>
     <aside class="notes">
       Three-step review. Reading the diff is non-negotiable. This is where the git mental model pays off directly.
     </aside>
   </section>
 
   <section>
-    <h2>Good prompts for Git tasks</h2>
+    <h2>Good Git prompts remove guesswork</h2>
     <div class="cols" style="font-size:.8em;">
       <div class="col">
         <p><span class="tag safe">Clear</span></p>
@@ -71,7 +71,7 @@
   </section>
 
   <section data-background-color="#f4f8fb">
-    <h2>You stay responsible</h2>
+    <h2>The commit still belongs to you</h2>
     <div class="cols" style="font-size:.84em;">
       <div class="col">
         <p>Your name goes on the commit. Your team relies on what lands in <code>main</code>. The agent is a fast pair of hands &mdash; the accountability is still yours.</p>

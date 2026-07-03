@@ -7,6 +7,23 @@
       <p class="subtitle">The smallest set of ideas you need to track your work, undo mistakes, and collaborate &mdash; whether you type the commands yourself or ask an AI agent to do it.</p>
       <p class="meta">Basic literacy module | For humans and their agents | 8 short modules</p>
     </div>
+    <div class="cover-graphic" aria-hidden="true">
+      <div class="repo-window">
+        <div class="window-bar"><span></span><span></span><span></span></div>
+        <div class="git-graph">
+          <div class="graph-row" style="--dot:var(--ait-amber);"><span class="graph-dot"></span><span class="graph-line"></span><span class="graph-label">snapshot</span></div>
+          <div class="graph-row" style="--dot:var(--ait-cyan);"><span class="graph-dot"></span><span class="graph-line"></span><span class="graph-label">review diff</span></div>
+          <div class="graph-row" style="--dot:var(--ait-violet);"><span class="graph-dot"></span><span class="graph-line"></span><span class="graph-label">agent branch</span></div>
+          <div class="graph-row" style="--dot:var(--ait-green);"><span class="graph-dot"></span><span class="graph-line"></span><span class="graph-label">shared main</span></div>
+        </div>
+        <div class="cmd-chip-row">
+          <span class="cmd-chip">git status</span>
+          <span class="cmd-chip">git add</span>
+          <span class="cmd-chip">git commit</span>
+          <span class="cmd-chip">git push</span>
+        </div>
+      </div>
+    </div>
     <aside class="notes">
       Frame the promise: by the end you can use git safely for real work. Every action is shown two ways &mdash;
       what you type as a human, and what you say to an agent. The goal is confidence, not completeness.
@@ -14,7 +31,7 @@
   </section>
 
   <section>
-    <h2>How this module reads</h2>
+    <h2>Every action has two drivers</h2>
     <p style="font-size:.85em;">Git is the same underneath no matter who drives. Throughout the deck, every action appears in two panels:</p>
     <div class="ha-grid">
       <div class="ha-panel human">
@@ -36,38 +53,38 @@
   </section>
 
   <section data-background-color="#f4f8fb">
-    <h2>The map</h2>
+    <h2>Learn the model before the mechanics</h2>
     <p class="footnote">Why it matters first, then the daily habits, then collaborating and staying safe.</p>
     <div class="course-map">
       <div class="map-node" style="--card-accent:var(--ait-amber);">
         <span class="icon-dot">1</span><span class="num">MODULE 01</span>
         <h4>Why Git</h4><p>Time machine &amp; safety net</p>
       </div>
-      <div class="map-node">
+      <div class="map-node" style="--card-accent:var(--ait-cyan);">
         <span class="icon-dot">2</span><span class="num">MODULE 02</span>
         <h4>Mental model</h4><p>Six words that unlock it</p>
       </div>
-      <div class="map-node">
+      <div class="map-node" style="--card-accent:var(--ait-green);">
         <span class="icon-dot">3</span><span class="num">MODULE 03</span>
         <h4>Daily loop</h4><p>status, add, commit, push</p>
       </div>
-      <div class="map-node">
+      <div class="map-node" style="--card-accent:var(--ait-violet);">
         <span class="icon-dot" style="color:var(--ait-violet);border-color:rgba(131,102,200,.42);">4</span><span class="num">MODULE 04</span>
         <h4>Branching</h4><p>Work without breaking things</p>
       </div>
-      <div class="map-node">
+      <div class="map-node" style="--card-accent:var(--ait-cyan);">
         <span class="icon-dot" style="color:var(--ait-cyan);border-color:rgba(21,151,181,.42);">5</span><span class="num">MODULE 05</span>
         <h4>GitHub</h4><p>Clone, push, pull requests</p>
       </div>
-      <div class="map-node">
+      <div class="map-node" style="--card-accent:var(--ait-violet);">
         <span class="icon-dot" style="color:var(--ait-violet);border-color:rgba(131,102,200,.42);">6</span><span class="num">MODULE 06</span>
         <h4>With agents</h4><p>Delegate &amp; review</p>
       </div>
-      <div class="map-node">
+      <div class="map-node" style="--card-accent:var(--ait-red);">
         <span class="icon-dot" style="color:var(--ait-red);border-color:rgba(201,75,75,.48);">7</span><span class="num">MODULE 07</span>
         <h4>Never forget</h4><p>Secrets, undo, force-push</p>
       </div>
-      <div class="map-node">
+      <div class="map-node" style="--card-accent:var(--ait-green);">
         <span class="icon-dot" style="color:var(--ait-green);border-color:rgba(52,149,111,.48);">8</span><span class="num">MODULE 08</span>
         <h4>Cheat sheet</h4><p>One page to keep</p>
       </div>
@@ -79,7 +96,7 @@
   </section>
 
   <section>
-    <h2>One sentence to carry through</h2>
+    <h2>The whole workflow fits in one sentence</h2>
     <div class="takeaway" style="font-size:1.15em;">Git saves <strong>snapshots</strong> of your work so you can go back, branch off, and share &mdash; and an agent can do all of it for you, but <strong>you review before it counts.</strong></div>
     <p class="footnote">Everything else in this deck is detail hanging off that sentence.</p>
     <aside class="notes">

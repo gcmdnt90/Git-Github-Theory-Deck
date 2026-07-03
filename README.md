@@ -43,8 +43,8 @@ module fragments.
 
 ## Design note
 
-Content-first, minimal graphics on purpose. No generated raster art is used, so
-the deck has no image dependencies. Visuals are plain HTML/CSS (cards, the
-four-box flow diagram, the human/agent dual panels) and are meant to be polished
-later by a design pass. Colour is semantic: cyan = human, violet = agent,
-green = safe habit, red = warning, amber = follow-this signal.
+Content-first, with generated HTML/CSS graphics instead of raster image
+dependencies. The deck uses a consistent commit-graph motif, file-stack,
+branching, remote-sync, and review-loop visuals. Colour is semantic: cyan =
+human, violet = agent, green = safe habit, red = warning, amber =
+follow-this signal.

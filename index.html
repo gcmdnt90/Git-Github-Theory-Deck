@@ -4,20 +4,979 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Git &amp; GitHub — for humans and their agents</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reset.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/theme/white.css" id="theme">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/monokai.css">
+  <style>
+/* ============================================================
+   AI Translator - Signal-on-Paper theme for Git and GitHub
+   ============================================================ */
 
-  <!-- reveal core -->
-  <link rel="stylesheet" href="vendor/reveal/dist/reset.css">
-  <link rel="stylesheet" href="vendor/reveal/dist/reveal.css">
-  <link rel="stylesheet" href="vendor/reveal/dist/theme/white.css" id="theme">
-  <!-- code highlighting -->
-  <link rel="stylesheet" href="vendor/reveal/plugin/highlight/monokai.css">
-  <!-- custom theme (overrides) -->
-  <link rel="stylesheet" href="css/theme.css">
+:root {
+  --ait-bg: #fbfaf6;
+  --ait-paper: #fffefd;
+  --ait-wash: #eef6f8;
+  --ait-ink: #243044;
+  --ait-ink-strong: #111827;
+  --ait-muted: #68758a;
+  --ait-line: #d7e0ea;
+  --ait-line-soft: rgba(36, 48, 68, .12);
+  --ait-amber: #e3a12f;
+  --ait-amber-dark: #b76f10;
+  --ait-cyan: #1597b5;
+  --ait-violet: #8366c8;
+  --ait-green: #34956f;
+  --ait-red: #c94b4b;
+  --ait-shadow: 0 18px 44px rgba(36, 48, 68, .09);
+  --ait-shadow-soft: 0 10px 28px rgba(36, 48, 68, .06);
+}
+
+.reveal {
+  color: var(--ait-ink);
+  font-family: "Inter", "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
+  font-size: 28px;
+}
+
+.reveal-viewport {
+  background:
+    radial-gradient(circle at 1px 1px, rgba(36, 48, 68, .08) 1px, transparent 0) 0 0 / 24px 24px,
+    linear-gradient(135deg, #fffdfa 0%, var(--ait-bg) 45%, #f3f8fa 100%);
+}
+
+.reveal .slides section {
+  box-sizing: border-box;
+  text-align: left;
+}
+
+.reveal .slides > section,
+.reveal .slides > section > section {
+  padding: 44px 58px !important;
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4 {
+  color: var(--ait-ink-strong);
+  font-family: "Inter", system-ui, sans-serif;
+  letter-spacing: 0;
+  line-height: 1.06;
+  text-transform: none;
+}
+
+.reveal h1 {
+  font-size: 2.42em;
+  font-weight: 850;
+  margin: 0 0 .22em;
+}
+
+.reveal h2 {
+  font-size: 1.55em;
+  font-weight: 820;
+  margin: 0 0 .46em;
+  max-width: 18ch;
+}
+
+.reveal h3 {
+  color: var(--ait-amber-dark);
+  font-size: 1em;
+  font-weight: 780;
+}
+
+.reveal h4 {
+  font-size: .88em;
+  font-weight: 790;
+  margin: 0 0 .28em;
+}
+
+.reveal p,
+.reveal li {
+  line-height: 1.34;
+}
+
+.reveal p {
+  margin: .35em 0;
+}
+
+.reveal a {
+  border-bottom: 1px solid rgba(21, 151, 181, .35);
+  color: var(--ait-cyan);
+  text-decoration: none;
+}
+
+.reveal strong {
+  color: var(--ait-amber-dark);
+  font-weight: 800;
+}
+
+.reveal em {
+  color: var(--ait-violet);
+  font-style: normal;
+}
+
+.reveal code {
+  color: var(--ait-ink-strong);
+  font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+  font-weight: 650;
+}
+
+.reveal pre {
+  background: #0f1724;
+  border: 1px solid rgba(255, 255, 255, .08);
+  border-radius: 8px;
+  box-shadow: var(--ait-shadow-soft);
+  color: #e8eef7;
+  font-size: .54em;
+  line-height: 1.32;
+  margin: .25em 0 .45em;
+  padding: .82em .95em;
+}
+
+.reveal pre code {
+  color: #e8eef7;
+  font-weight: 560;
+  max-height: none;
+}
+
+.reveal ul,
+.reveal ol {
+  display: block;
+  margin-left: 1em;
+}
+
+.reveal li {
+  margin: .23em 0;
+}
+
+.reveal li::marker {
+  color: var(--ait-amber);
+}
+
+.micro,
+.deck-cover .meta,
+.deck-cover .kicker,
+.module-cover .kicker {
+  color: var(--ait-muted);
+  font-size: .53em;
+  font-weight: 820;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.deck-cover,
+.module-cover {
+  min-height: 610px;
+  overflow: hidden;
+  position: relative;
+}
+
+.deck-cover::before,
+.module-cover::before {
+  background:
+    linear-gradient(90deg, rgba(21, 151, 181, .16), transparent 45%),
+    linear-gradient(180deg, rgba(227, 161, 47, .13), transparent 44%);
+  content: "";
+  inset: 0;
+  opacity: .65;
+  pointer-events: none;
+  position: absolute;
+}
+
+.deck-cover {
+  align-items: center;
+  display: grid !important;
+  gap: 54px;
+  grid-template-columns: minmax(0, .96fr) minmax(420px, .78fr);
+}
+
+.deck-cover .cover-copy,
+.deck-cover .cover-graphic,
+.module-cover > * {
+  position: relative;
+  z-index: 1;
+}
+
+.deck-cover h1 {
+  font-size: 3.08em;
+  letter-spacing: -.01em;
+  max-width: 8.7em;
+}
+
+.deck-cover .subtitle {
+  color: var(--ait-muted);
+  font-size: .88em;
+  line-height: 1.38;
+  max-width: 37em;
+}
+
+.deck-cover .meta {
+  margin-top: 1.8em;
+}
+
+.module-cover {
+  align-items: center;
+  display: flex !important;
+}
+
+.module-cover::after {
+  background:
+    radial-gradient(circle, rgba(227, 161, 47, .92) 0 6px, transparent 7px),
+    radial-gradient(circle, rgba(21, 151, 181, .88) 0 6px, transparent 7px),
+    radial-gradient(circle, rgba(131, 102, 200, .86) 0 6px, transparent 7px),
+    linear-gradient(23deg, transparent 0 31%, rgba(36, 48, 68, .13) 31.2% 31.8%, transparent 32% 100%),
+    linear-gradient(-18deg, transparent 0 42%, rgba(36, 48, 68, .12) 42.2% 42.8%, transparent 43% 100%);
+  background-position: 70% 32%, 82% 48%, 63% 67%, 0 0, 0 0;
+  background-repeat: no-repeat;
+  background-size: 18px 18px, 18px 18px, 18px 18px, 100% 100%, 100% 100%;
+  content: "";
+  height: 380px;
+  opacity: .75;
+  position: absolute;
+  right: 34px;
+  top: 116px;
+  width: 430px;
+}
+
+.module-cover h1 {
+  max-width: 12em;
+}
+
+.module-cover .lede {
+  color: var(--ait-muted);
+  font-size: .86em;
+  line-height: 1.35;
+  max-width: 34ch;
+}
+
+.module-cover .modnum {
+  color: rgba(36, 48, 68, .075);
+  font-size: 6.8em;
+  font-weight: 880;
+  line-height: .85;
+  position: absolute;
+  right: 54px;
+  top: 44px;
+}
+
+.cols {
+  align-items: center;
+  display: grid;
+  gap: 1.1em;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.cols.top {
+  align-items: start;
+}
+
+.cols.c-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.cols.c-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.cols.fit-two {
+  gap: .72em;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.col {
+  min-width: 0;
+}
+
+.stack-sm > * + * {
+  margin-top: .55em;
+}
+
+.card,
+.signal-card,
+.ha-panel,
+.mini-card,
+.file-card,
+.repo-window {
+  background: rgba(255, 255, 255, .88);
+  border: 1px solid var(--ait-line);
+  border-radius: 8px;
+  box-shadow: var(--ait-shadow-soft);
+}
+
+.card,
+.signal-card {
+  overflow: hidden;
+  padding: .74em .82em .78em;
+  position: relative;
+}
+
+.card::before,
+.signal-card::before {
+  background: var(--card-accent, var(--ait-amber));
+  content: "";
+  height: 4px;
+  inset: 0 0 auto;
+  position: absolute;
+}
+
+.card p,
+.signal-card p {
+  color: var(--ait-muted);
+  font-size: .68em;
+  margin: .18em 0 0;
+}
+
+.signal-card {
+  min-height: 102px;
+}
+
+.takeaway,
+.safebox,
+.warnbox,
+.say {
+  border-radius: 8px;
+}
+
+.takeaway {
+  background:
+    linear-gradient(90deg, rgba(227, 161, 47, .15), rgba(255, 255, 255, .82)),
+    rgba(255, 255, 255, .72);
+  border: 1px solid rgba(227, 161, 47, .32);
+  border-left: 5px solid var(--ait-amber);
+  box-shadow: 0 10px 26px rgba(227, 161, 47, .08);
+  color: var(--ait-ink);
+  font-size: .76em;
+  margin-top: .78em;
+  padding: .58em .72em;
+}
+
+.safebox,
+.warnbox {
+  font-size: .78em;
+  line-height: 1.36;
+  margin: .42em 0;
+  padding: .66em .78em;
+}
+
+.safebox {
+  background: rgba(52, 149, 111, .075);
+  border: 1px solid rgba(52, 149, 111, .22);
+  border-left: 5px solid var(--ait-green);
+}
+
+.warnbox {
+  background: rgba(201, 75, 75, .075);
+  border: 1px solid rgba(201, 75, 75, .22);
+  border-left: 5px solid var(--ait-red);
+}
+
+.footnote,
+.sources {
+  color: var(--ait-muted);
+  font-size: .47em;
+  line-height: 1.45;
+}
+
+.sources {
+  font-size: .5em;
+}
+
+.tag,
+.chip {
+  border: 1px solid var(--ait-line);
+  border-radius: 999px;
+  display: inline-block;
+  font-size: .56em;
+  font-weight: 790;
+  letter-spacing: .04em;
+  margin-right: .28em;
+  padding: .14em .55em;
+  vertical-align: middle;
+}
+
+.tag {
+  background: rgba(255, 255, 255, .74);
+  color: var(--ait-ink);
+}
+
+.tag.human,
+.chip.inside {
+  background: rgba(21, 151, 181, .09);
+  border-color: rgba(21, 151, 181, .38);
+  color: var(--ait-cyan);
+}
+
+.tag.agent,
+.chip.around {
+  background: rgba(131, 102, 200, .09);
+  border-color: rgba(131, 102, 200, .38);
+  color: var(--ait-violet);
+}
+
+.tag.safe,
+.chip.safe {
+  background: rgba(52, 149, 111, .09);
+  border-color: rgba(52, 149, 111, .38);
+  color: var(--ait-green);
+}
+
+.tag.warn,
+.chip.risk {
+  background: rgba(201, 75, 75, .09);
+  border-color: rgba(201, 75, 75, .38);
+  color: var(--ait-red);
+}
+
+.ha-grid {
+  display: grid;
+  gap: .82em;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  margin: .52em 0;
+}
+
+.ha-panel {
+  overflow: hidden;
+  padding: .68em .78em .78em;
+  position: relative;
+}
+
+.ha-panel::before {
+  background: var(--ait-cyan);
+  content: "";
+  height: 5px;
+  inset: 0 0 auto;
+  position: absolute;
+}
+
+.ha-panel.agent::before {
+  background: var(--ait-violet);
+}
+
+.ha-panel .ha-label {
+  align-items: center;
+  color: var(--ait-cyan);
+  display: inline-flex;
+  font-size: .55em;
+  font-weight: 840;
+  gap: .42em;
+  letter-spacing: .12em;
+  margin-bottom: .35em;
+  text-transform: uppercase;
+}
+
+.ha-panel.agent .ha-label {
+  color: var(--ait-violet);
+}
+
+.ha-panel .ha-label::before {
+  background: currentColor;
+  border-radius: 50%;
+  box-shadow: 0 0 14px color-mix(in srgb, currentColor 34%, transparent);
+  content: "";
+  height: .62em;
+  width: .62em;
+}
+
+.ha-panel p,
+.ha-panel .say {
+  color: var(--ait-muted);
+  font-size: .63em;
+  margin: .28em 0 0;
+}
+
+.ha-panel pre {
+  font-size: .48em;
+  margin: .05em 0 .42em;
+}
+
+.say {
+  background: rgba(131, 102, 200, .09);
+  border: 1px solid rgba(131, 102, 200, .2);
+  color: var(--ait-ink) !important;
+  font-size: .7em;
+  line-height: 1.35;
+  padding: .42em .56em;
+}
+
+.cmd-list {
+  display: flex;
+  flex-direction: column;
+  gap: .34em;
+  margin: .48em 0;
+}
+
+.cmd-row {
+  align-items: baseline;
+  background: rgba(255, 255, 255, .66);
+  border: 1px solid rgba(215, 224, 234, .8);
+  border-radius: 8px;
+  display: grid;
+  gap: .7em;
+  grid-template-columns: minmax(210px, 290px) 1fr;
+  padding: .34em .48em;
+}
+
+.cmd-row code {
+  background: #111827;
+  border-radius: 6px;
+  color: #edf4ff;
+  display: inline-block;
+  font-size: .64em;
+  padding: .22em .46em;
+  white-space: nowrap;
+}
+
+.cmd-row span {
+  color: var(--ait-muted);
+  font-size: .64em;
+}
+
+.course-map {
+  display: grid;
+  gap: .52em;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: .45em;
+}
+
+.map-node {
+  background: rgba(255, 255, 255, .86);
+  border: 1px solid var(--ait-line);
+  border-radius: 8px;
+  box-shadow: var(--ait-shadow-soft);
+  display: grid;
+  gap: .26em;
+  min-height: 116px;
+  padding: .54em .58em;
+  position: relative;
+}
+
+.map-node::after {
+  background: linear-gradient(90deg, var(--card-accent, var(--ait-amber)), transparent);
+  bottom: 0;
+  content: "";
+  height: 4px;
+  left: 0;
+  position: absolute;
+  right: 0;
+}
+
+.map-node .num {
+  color: var(--ait-amber-dark);
+  font-size: .5em;
+  font-weight: 850;
+  letter-spacing: .12em;
+}
+
+.map-node h4 {
+  font-size: .72em;
+  margin: 0;
+}
+
+.map-node p {
+  color: var(--ait-muted);
+  font-size: .5em;
+  margin: 0;
+}
+
+.icon-dot {
+  align-items: center;
+  background: rgba(227, 161, 47, .09);
+  border: 1px solid rgba(227, 161, 47, .42);
+  border-radius: 50%;
+  color: var(--ait-amber-dark);
+  display: inline-flex;
+  font-size: .55em;
+  font-weight: 840;
+  height: 32px;
+  justify-content: center;
+  width: 32px;
+}
+
+.flow-boxes {
+  display: grid;
+  gap: .55em;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: .72em 0 .62em;
+  position: relative;
+}
+
+.flow-boxes::before {
+  background: linear-gradient(90deg, rgba(227, 161, 47, .55), rgba(21, 151, 181, .45), rgba(131, 102, 200, .45));
+  content: "";
+  height: 4px;
+  left: 9%;
+  position: absolute;
+  right: 9%;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 0;
+}
+
+.flow-box {
+  background: rgba(255, 255, 255, .94);
+  border: 1px solid var(--ait-line);
+  border-radius: 8px;
+  box-shadow: var(--ait-shadow-soft);
+  min-height: 116px;
+  padding: .64em .56em;
+  position: relative;
+  text-align: center;
+  z-index: 1;
+}
+
+.flow-box::after {
+  color: var(--ait-amber-dark);
+  content: "\2192";
+  font-size: .9em;
+  font-weight: 900;
+  position: absolute;
+  right: -.46em;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.flow-box:last-child::after {
+  content: "";
+}
+
+.flow-box .fb-name {
+  color: var(--ait-ink-strong);
+  display: block;
+  font-size: .78em;
+  font-weight: 820;
+}
+
+.flow-box .fb-sub {
+  color: var(--ait-muted);
+  display: block;
+  font-size: .57em;
+  margin-top: .3em;
+}
+
+.quote-strip {
+  display: grid;
+  gap: .65em;
+  grid-template-columns: 1fr 1fr;
+  margin-top: .55em;
+}
+
+.quote-strip blockquote {
+  background: rgba(255, 255, 255, .82);
+  border: 1px solid var(--ait-line);
+  border-left: 5px solid var(--ait-amber);
+  border-radius: 8px;
+  color: var(--ait-ink);
+  font-size: .62em;
+  line-height: 1.34;
+  margin: 0;
+  padding: .65em .78em;
+}
+
+.quote-strip cite {
+  color: var(--ait-muted);
+  display: block;
+  font-size: .82em;
+  font-style: normal;
+  margin-top: .28em;
+}
+
+/* Generated visual system */
+
+.cover-graphic {
+  transform: rotate(-1.5deg);
+}
+
+.repo-window {
+  background:
+    radial-gradient(circle at 78% 12%, rgba(131, 102, 200, .16), transparent 22%),
+    linear-gradient(180deg, rgba(255, 255, 255, .96), rgba(249, 252, 253, .9));
+  padding: .7em .82em .86em;
+}
+
+.window-bar {
+  align-items: center;
+  border-bottom: 1px solid var(--ait-line);
+  display: flex;
+  gap: .24em;
+  margin: -.18em -.2em .62em;
+  padding: 0 0 .48em;
+}
+
+.window-bar span {
+  border-radius: 50%;
+  display: block;
+  height: 10px;
+  width: 10px;
+}
+
+.window-bar span:nth-child(1) { background: var(--ait-red); }
+.window-bar span:nth-child(2) { background: var(--ait-amber); }
+.window-bar span:nth-child(3) { background: var(--ait-green); }
+
+.git-graph {
+  display: grid;
+  gap: .34em;
+  margin: .4em 0 .72em;
+}
+
+.graph-row {
+  align-items: center;
+  display: grid;
+  gap: .42em;
+  grid-template-columns: 22px 1fr auto;
+}
+
+.graph-dot {
+  background: var(--dot, var(--ait-amber));
+  border-radius: 50%;
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--dot, var(--ait-amber)) 15%, transparent);
+  height: 14px;
+  width: 14px;
+}
+
+.graph-line {
+  background: linear-gradient(90deg, color-mix(in srgb, var(--dot, var(--ait-amber)) 72%, white), transparent);
+  border-radius: 999px;
+  height: 4px;
+}
+
+.graph-label {
+  color: var(--ait-muted);
+  font-family: "JetBrains Mono", Consolas, monospace;
+  font-size: .48em;
+  white-space: nowrap;
+}
+
+.cmd-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .36em;
+}
+
+.cmd-chip {
+  background: #111827;
+  border: 1px solid rgba(255, 255, 255, .08);
+  border-radius: 999px;
+  color: #edf4ff;
+  font-family: "JetBrains Mono", Consolas, monospace;
+  font-size: .48em;
+  padding: .24em .58em;
+}
+
+.file-stack {
+  height: 245px;
+  margin-top: .2em;
+  position: relative;
+}
+
+.file-card {
+  font-family: "JetBrains Mono", Consolas, monospace;
+  font-size: .56em;
+  left: 0;
+  padding: .72em .78em;
+  position: absolute;
+  right: 0;
+}
+
+.file-card:nth-child(1) {
+  top: 0;
+  transform: rotate(-2deg);
+}
+
+.file-card:nth-child(2) {
+  top: 54px;
+  transform: rotate(1deg);
+}
+
+.file-card:nth-child(3) {
+  top: 108px;
+  transform: rotate(-.8deg);
+}
+
+.file-card:nth-child(4) {
+  border-color: rgba(201, 75, 75, .34);
+  color: var(--ait-red);
+  top: 162px;
+  transform: rotate(1.5deg);
+}
+
+.branch-graph,
+.remote-flow,
+.review-loop {
+  background:
+    radial-gradient(circle at 1px 1px, rgba(36, 48, 68, .09) 1px, transparent 0) 0 0 / 18px 18px,
+    rgba(255, 255, 255, .8);
+  border: 1px solid var(--ait-line);
+  border-radius: 8px;
+  box-shadow: var(--ait-shadow-soft);
+  min-height: 210px;
+  overflow: hidden;
+  padding: .78em;
+  position: relative;
+}
+
+.branch-graph {
+  min-height: 240px;
+}
+
+.branch-graph::before,
+.branch-graph::after {
+  border: 4px solid transparent;
+  border-radius: 999px;
+  content: "";
+  height: 118px;
+  left: 42px;
+  position: absolute;
+  top: 58px;
+  width: 300px;
+}
+
+.branch-graph::before {
+  border-bottom-color: rgba(227, 161, 47, .58);
+}
+
+.branch-graph::after {
+  border-top-color: rgba(131, 102, 200, .58);
+  transform: translateY(22px);
+}
+
+.branch-node {
+  background: var(--node, var(--ait-amber));
+  border: 5px solid rgba(255, 255, 255, .86);
+  border-radius: 50%;
+  box-shadow: var(--ait-shadow-soft);
+  height: 24px;
+  position: absolute;
+  width: 24px;
+  z-index: 1;
+}
+
+.branch-node.n1 { left: 56px; top: 136px; }
+.branch-node.n2 { left: 158px; top: 136px; }
+.branch-node.n3 { left: 260px; top: 136px; }
+.branch-node.n4 { left: 190px; top: 70px; --node: var(--ait-violet); }
+.branch-node.n5 { left: 292px; top: 72px; --node: var(--ait-violet); }
+.branch-node.n6 { left: 350px; top: 136px; --node: var(--ait-green); }
+
+.branch-label {
+  background: rgba(255, 255, 255, .88);
+  border: 1px solid var(--ait-line);
+  border-radius: 999px;
+  color: var(--ait-muted);
+  font-family: "JetBrains Mono", Consolas, monospace;
+  font-size: .48em;
+  padding: .22em .58em;
+  position: absolute;
+}
+
+.branch-label.main { left: 48px; top: 184px; }
+.branch-label.feature { left: 182px; top: 28px; }
+.branch-label.merge { right: 28px; top: 184px; }
+
+.remote-flow {
+  display: grid;
+  gap: .55em;
+  grid-template-columns: 1fr 1fr;
+  min-height: 188px;
+}
+
+.remote-node {
+  align-content: center;
+  background: rgba(255, 255, 255, .9);
+  border: 1px solid var(--ait-line);
+  border-radius: 8px;
+  display: grid;
+  justify-items: center;
+  min-height: 128px;
+  position: relative;
+}
+
+.remote-node strong {
+  color: var(--ait-ink-strong);
+  font-size: .74em;
+}
+
+.remote-node span {
+  color: var(--ait-muted);
+  font-size: .52em;
+}
+
+.remote-flow::before,
+.remote-flow::after {
+  color: var(--ait-amber-dark);
+  font-family: "JetBrains Mono", Consolas, monospace;
+  font-size: .5em;
+  font-weight: 800;
+  left: 50%;
+  position: absolute;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+.remote-flow::before {
+  content: "push ->";
+  top: 64px;
+}
+
+.remote-flow::after {
+  content: "<- pull";
+  bottom: 62px;
+}
+
+.review-loop {
+  display: grid;
+  gap: .5em;
+  grid-template-columns: repeat(3, 1fr);
+  min-height: 142px;
+}
+
+.review-step {
+  background: rgba(255, 255, 255, .88);
+  border: 1px solid var(--ait-line);
+  border-radius: 8px;
+  padding: .54em .58em;
+}
+
+.review-step strong {
+  color: var(--ait-ink-strong);
+  display: block;
+  font-size: .64em;
+}
+
+.review-step span {
+  color: var(--ait-muted);
+  display: block;
+  font-size: .5em;
+  margin-top: .22em;
+}
+
+.cheat-sheet .cmd-row {
+  grid-template-columns: minmax(180px, 250px) 1fr;
+  padding: .3em .42em;
+}
+
+.cheat-sheet .cmd-row code {
+  font-size: .58em;
+}
+
+.cheat-sheet .cmd-row span {
+  font-size: .58em;
+}
+
+@media (max-width: 900px) {
+  .deck-cover {
+    grid-template-columns: 1fr;
+  }
+
+  .deck-cover .cover-graphic {
+    display: none;
+  }
+}
+  </style>
 </head>
 <body>
   <div class="reveal">
     <div class="slides">
-<!-- ==== MODULES INJECTED BY build.mjs — DO NOT EDIT index.html BY HAND ==== -->
 
 <!-- ===== 00-cover.html ===== -->
 <section>
@@ -29,6 +988,23 @@
       <p class="subtitle">The smallest set of ideas you need to track your work, undo mistakes, and collaborate &mdash; whether you type the commands yourself or ask an AI agent to do it.</p>
       <p class="meta">Basic literacy module | For humans and their agents | 8 short modules</p>
     </div>
+    <div class="cover-graphic" aria-hidden="true">
+      <div class="repo-window">
+        <div class="window-bar"><span></span><span></span><span></span></div>
+        <div class="git-graph">
+          <div class="graph-row" style="--dot:var(--ait-amber);"><span class="graph-dot"></span><span class="graph-line"></span><span class="graph-label">snapshot</span></div>
+          <div class="graph-row" style="--dot:var(--ait-cyan);"><span class="graph-dot"></span><span class="graph-line"></span><span class="graph-label">review diff</span></div>
+          <div class="graph-row" style="--dot:var(--ait-violet);"><span class="graph-dot"></span><span class="graph-line"></span><span class="graph-label">agent branch</span></div>
+          <div class="graph-row" style="--dot:var(--ait-green);"><span class="graph-dot"></span><span class="graph-line"></span><span class="graph-label">shared main</span></div>
+        </div>
+        <div class="cmd-chip-row">
+          <span class="cmd-chip">git status</span>
+          <span class="cmd-chip">git add</span>
+          <span class="cmd-chip">git commit</span>
+          <span class="cmd-chip">git push</span>
+        </div>
+      </div>
+    </div>
     <aside class="notes">
       Frame the promise: by the end you can use git safely for real work. Every action is shown two ways &mdash;
       what you type as a human, and what you say to an agent. The goal is confidence, not completeness.
@@ -36,7 +1012,7 @@
   </section>
 
   <section>
-    <h2>How this module reads</h2>
+    <h2>Every action has two drivers</h2>
     <p style="font-size:.85em;">Git is the same underneath no matter who drives. Throughout the deck, every action appears in two panels:</p>
     <div class="ha-grid">
       <div class="ha-panel human">
@@ -58,38 +1034,38 @@
   </section>
 
   <section data-background-color="#f4f8fb">
-    <h2>The map</h2>
+    <h2>Learn the model before the mechanics</h2>
     <p class="footnote">Why it matters first, then the daily habits, then collaborating and staying safe.</p>
     <div class="course-map">
       <div class="map-node" style="--card-accent:var(--ait-amber);">
         <span class="icon-dot">1</span><span class="num">MODULE 01</span>
         <h4>Why Git</h4><p>Time machine &amp; safety net</p>
       </div>
-      <div class="map-node">
+      <div class="map-node" style="--card-accent:var(--ait-cyan);">
         <span class="icon-dot">2</span><span class="num">MODULE 02</span>
         <h4>Mental model</h4><p>Six words that unlock it</p>
       </div>
-      <div class="map-node">
+      <div class="map-node" style="--card-accent:var(--ait-green);">
         <span class="icon-dot">3</span><span class="num">MODULE 03</span>
         <h4>Daily loop</h4><p>status, add, commit, push</p>
       </div>
-      <div class="map-node">
+      <div class="map-node" style="--card-accent:var(--ait-violet);">
         <span class="icon-dot" style="color:var(--ait-violet);border-color:rgba(131,102,200,.42);">4</span><span class="num">MODULE 04</span>
         <h4>Branching</h4><p>Work without breaking things</p>
       </div>
-      <div class="map-node">
+      <div class="map-node" style="--card-accent:var(--ait-cyan);">
         <span class="icon-dot" style="color:var(--ait-cyan);border-color:rgba(21,151,181,.42);">5</span><span class="num">MODULE 05</span>
         <h4>GitHub</h4><p>Clone, push, pull requests</p>
       </div>
-      <div class="map-node">
+      <div class="map-node" style="--card-accent:var(--ait-violet);">
         <span class="icon-dot" style="color:var(--ait-violet);border-color:rgba(131,102,200,.42);">6</span><span class="num">MODULE 06</span>
         <h4>With agents</h4><p>Delegate &amp; review</p>
       </div>
-      <div class="map-node">
+      <div class="map-node" style="--card-accent:var(--ait-red);">
         <span class="icon-dot" style="color:var(--ait-red);border-color:rgba(201,75,75,.48);">7</span><span class="num">MODULE 07</span>
         <h4>Never forget</h4><p>Secrets, undo, force-push</p>
       </div>
-      <div class="map-node">
+      <div class="map-node" style="--card-accent:var(--ait-green);">
         <span class="icon-dot" style="color:var(--ait-green);border-color:rgba(52,149,111,.48);">8</span><span class="num">MODULE 08</span>
         <h4>Cheat sheet</h4><p>One page to keep</p>
       </div>
@@ -101,7 +1077,7 @@
   </section>
 
   <section>
-    <h2>One sentence to carry through</h2>
+    <h2>The whole workflow fits in one sentence</h2>
     <div class="takeaway" style="font-size:1.15em;">Git saves <strong>snapshots</strong> of your work so you can go back, branch off, and share &mdash; and an agent can do all of it for you, but <strong>you review before it counts.</strong></div>
     <p class="footnote">Everything else in this deck is detail hanging off that sentence.</p>
     <aside class="notes">
@@ -116,7 +1092,7 @@
 <!-- ===== 01-why-git.html ===== -->
 <section>
 
-  <section class="module-cover" data-background-color="#fbfaf6">
+  <section class="module-cover mod-01" data-background-color="#fbfaf6">
     <span class="modnum">01</span>
     <p class="kicker">Module 1</p>
     <h1>Why Git is worth it</h1>
@@ -127,14 +1103,16 @@
   </section>
 
   <section>
-    <h2>The problem without Git</h2>
+    <h2>File-name versioning breaks silently</h2>
     <div class="cols">
       <div class="col" style="font-size:.82em;">
         <p>You know this file folder:</p>
-        <pre><code class="language-text">report_final.docx
-report_final_v2.docx
-report_final_REAL.docx
-report_final_use-this-one.docx</code></pre>
+        <div class="file-stack" aria-hidden="true">
+          <div class="file-card">report_final.docx</div>
+          <div class="file-card">report_final_v2.docx</div>
+          <div class="file-card">report_final_REAL.docx</div>
+          <div class="file-card">report_final_use-this-one.docx</div>
+        </div>
         <p>It breaks down the moment you need to answer: <em>what changed, when, and can I get the old version back?</em></p>
       </div>
       <div class="col" style="font-size:.82em;">
@@ -148,7 +1126,7 @@ report_final_use-this-one.docx</code></pre>
   </section>
 
   <section data-background-color="#f4f8fb">
-    <h2>What Git gives you instead</h2>
+    <h2>Git makes change recoverable</h2>
     <div class="cols c-3" style="font-size:.8em;">
       <div class="card" style="--card-accent:var(--ait-amber);">
         <h4>A time machine</h4>
@@ -170,15 +1148,15 @@ report_final_use-this-one.docx</code></pre>
   </section>
 
   <section>
-    <h2>Why it matters more in the age of agents</h2>
+    <h2>Agents make version control non-optional</h2>
     <div class="cols" style="font-size:.82em;">
       <div class="col">
         <p>An AI agent can change dozens of files in seconds. That is powerful &mdash; and risky if you can&rsquo;t see or undo what it did.</p>
-        <p>Git is what makes agent help <strong>safe to accept</strong>: every change is a reviewable snapshot you can inspect, keep, or throw away.</p>
+        <p>Git is what makes agent help <strong>safe to accept</strong>: you can inspect the diff, save the good work as a commit, and throw away the rest.</p>
       </div>
       <div class="col">
         <div class="safebox"><strong>With Git:</strong> &ldquo;Show me exactly what you changed&rdquo; and &ldquo;undo that&rdquo; are one command away.</div>
-        <div class="warnbox"><strong>Without Git:</strong> an agent&rsquo;s edits overwrite your files with no record and no undo.</div>
+        <div class="warnbox"><strong>Without Git:</strong> an agent&rsquo;s edits can overwrite files with no reliable record of what changed.</div>
       </div>
     </div>
     <div class="takeaway">Git is the seatbelt for working with agents. It doesn&rsquo;t slow you down &mdash; it lets you go faster safely.</div>
@@ -193,7 +1171,7 @@ report_final_use-this-one.docx</code></pre>
 <!-- ===== 02-mental-model.html ===== -->
 <section>
 
-  <section class="module-cover" data-background-color="#fbfaf6">
+  <section class="module-cover mod-02" data-background-color="#fbfaf6">
     <span class="modnum">02</span>
     <p class="kicker">Module 2</p>
     <h1>The mental model</h1>
@@ -204,7 +1182,7 @@ report_final_use-this-one.docx</code></pre>
   </section>
 
   <section>
-    <h2>The six words</h2>
+    <h2>Six Git words unlock the workflow</h2>
     <div class="cols c-3" style="font-size:.74em;">
       <div class="card" style="--card-accent:var(--ait-cyan);">
         <h4>Repository (repo)</h4>
@@ -237,7 +1215,7 @@ report_final_use-this-one.docx</code></pre>
   </section>
 
   <section data-background-color="#f4f8fb">
-    <h2>How a change travels</h2>
+    <h2>Changes move through four places</h2>
     <p style="font-size:.8em;">A change moves through four places. Each git command just moves it one step along:</p>
     <div class="flow-boxes">
       <div class="flow-box">
@@ -266,7 +1244,7 @@ report_final_use-this-one.docx</code></pre>
   </section>
 
   <section>
-    <h2>Does the agent need a different model? No.</h2>
+    <h2>Agents use the same four boxes</h2>
     <div class="cols" style="font-size:.82em;">
       <div class="col">
         <p>When you ask an agent to &ldquo;save this and push it,&rdquo; it walks the exact same four boxes: it stages, commits, and pushes.</p>
@@ -287,7 +1265,7 @@ report_final_use-this-one.docx</code></pre>
 <!-- ===== 03-daily-loop.html ===== -->
 <section>
 
-  <section class="module-cover" data-background-color="#fbfaf6">
+  <section class="module-cover mod-03" data-background-color="#fbfaf6">
     <span class="modnum">03</span>
     <p class="kicker">Module 3</p>
     <h1>The everyday loop</h1>
@@ -298,7 +1276,7 @@ report_final_use-this-one.docx</code></pre>
   </section>
 
   <section>
-    <h2>The loop, once</h2>
+    <h2>The daily loop is five moves</h2>
     <p style="font-size:.8em;">You repeat this cycle all day: see what changed, stage it, save it, share it.</p>
     <div class="cmd-list">
       <div class="cmd-row"><code>git status</code><span>What changed and what&rsquo;s staged. Run it constantly &mdash; it&rsquo;s free.</span></div>
@@ -314,7 +1292,7 @@ report_final_use-this-one.docx</code></pre>
   </section>
 
   <section data-background-color="#f4f8fb">
-    <h2>Saving your work &mdash; both ways</h2>
+    <h2>Saving work is stage, commit, push</h2>
     <div class="ha-grid">
       <div class="ha-panel human">
         <span class="ha-label">You (human)</span>
@@ -336,7 +1314,7 @@ git push</code></pre>
   </section>
 
   <section>
-    <h2>Seeing what&rsquo;s going on &mdash; both ways</h2>
+    <h2>Review before you save</h2>
     <div class="ha-grid">
       <div class="ha-panel human">
         <span class="ha-label">You (human)</span>
@@ -358,7 +1336,7 @@ git log --oneline   # history so far</code></pre>
   </section>
 
   <section data-background-color="#f4f8fb">
-    <h2>Starting a repo (you do this once)</h2>
+    <h2>Start once, then loop forever</h2>
     <div class="cols" style="font-size:.8em;">
       <div class="col">
         <p><strong>New project on your machine:</strong></p>
@@ -384,7 +1362,7 @@ git commit -m "First commit"</code></pre>
 <!-- ===== 04-branching.html ===== -->
 <section>
 
-  <section class="module-cover" data-background-color="#fbfaf6">
+  <section class="module-cover mod-04" data-background-color="#fbfaf6">
     <span class="modnum">04</span>
     <p class="kicker">Module 4</p>
     <h1>Branching &amp; merging</h1>
@@ -395,13 +1373,24 @@ git commit -m "First commit"</code></pre>
   </section>
 
   <section>
-    <h2>What a branch is for</h2>
+    <h2>Branches keep experiments off main</h2>
     <div class="cols" style="font-size:.82em;">
       <div class="col">
         <p>Your working version lives on a branch, usually called <code>main</code>. You want <code>main</code> to always work.</p>
         <p>To try a change, you <strong>branch off</strong>: make a parallel copy, experiment there, and only bring it back to <code>main</code> when it&rsquo;s good.</p>
       </div>
       <div class="col">
+        <div class="branch-graph" aria-hidden="true">
+          <span class="branch-node n1"></span>
+          <span class="branch-node n2"></span>
+          <span class="branch-node n3"></span>
+          <span class="branch-node n4"></span>
+          <span class="branch-node n5"></span>
+          <span class="branch-node n6"></span>
+          <span class="branch-label main">main</span>
+          <span class="branch-label feature">new-feature</span>
+          <span class="branch-label merge">merge</span>
+        </div>
         <div class="safebox">If the experiment fails, you just delete the branch. <code>main</code> never knew it existed.</div>
         <p style="font-size:.9em;">This is why teams can work in parallel: everyone on their own branch, merging in when ready.</p>
       </div>
@@ -412,7 +1401,7 @@ git commit -m "First commit"</code></pre>
   </section>
 
   <section data-background-color="#f4f8fb">
-    <h2>Branching &mdash; both ways</h2>
+    <h2>Branch, work, merge when ready</h2>
     <div class="ha-grid">
       <div class="ha-panel human">
         <span class="ha-label">You (human)</span>
@@ -435,16 +1424,16 @@ git merge new-feature       # bring the work in</code></pre>
   </section>
 
   <section>
-    <h2>Merge conflicts &mdash; not scary</h2>
+    <h2>A conflict is Git asking a question</h2>
     <div class="cols" style="font-size:.82em;">
       <div class="col">
         <p>A conflict happens when two branches changed the <strong>same lines</strong>. Git can&rsquo;t guess which to keep, so it asks you.</p>
         <p>It marks the spot in the file:</p>
-        <pre><code class="language-text">&lt;&lt;&lt;&lt;&lt;&lt;&lt; your version
+        <pre><code class="language-text">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
 hello world
 =======
 hello there
-&gt;&gt;&gt;&gt;&gt;&gt;&gt; their version</code></pre>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; new-feature</code></pre>
       </div>
       <div class="col">
         <p>You edit the file to the version you want, delete the marker lines, then <code>git add</code> and <code>git commit</code>.</p>
@@ -466,7 +1455,7 @@ hello there
 <!-- ===== 05-github.html ===== -->
 <section>
 
-  <section class="module-cover" data-background-color="#fbfaf6">
+  <section class="module-cover mod-05" data-background-color="#fbfaf6">
     <span class="modnum">05</span>
     <p class="kicker">Module 5</p>
     <h1>GitHub</h1>
@@ -477,12 +1466,12 @@ hello there
   </section>
 
   <section>
-    <h2>Git vs GitHub &mdash; the one distinction people mix up</h2>
+    <h2>Git is the tool; GitHub is the shared place</h2>
     <div class="cols" style="font-size:.82em;">
       <div class="col">
         <div class="card" style="--card-accent:var(--ait-cyan);">
           <h4>Git</h4>
-          <p>The version-control <strong>tool</strong> on your machine. Works fully offline. Made by no single company.</p>
+          <p>The version-control <strong>tool</strong> on your machine. Works fully offline and is not owned by GitHub.</p>
         </div>
       </div>
       <div class="col">
@@ -499,21 +1488,31 @@ hello there
   </section>
 
   <section data-background-color="#f4f8fb">
-    <h2>The GitHub connection</h2>
-    <p style="font-size:.8em;">Your local repo talks to GitHub through two commands you already met:</p>
-    <div class="cmd-list">
-      <div class="cmd-row"><code>git clone &lt;url&gt;</code><span>Copy a GitHub repo (with history) down to your machine.</span></div>
-      <div class="cmd-row"><code>git push</code><span>Send your local commits up to GitHub for others to see.</span></div>
-      <div class="cmd-row"><code>git pull</code><span>Bring down what others pushed. Do this before starting work.</span></div>
+    <h2>Your local repo and GitHub stay in sync</h2>
+    <div class="cols top" style="font-size:.8em;">
+      <div class="col">
+        <p>Your local repo talks to GitHub through three commands you already met:</p>
+        <div class="cmd-list">
+          <div class="cmd-row"><code>git clone &lt;url&gt;</code><span>Copy a GitHub repo (with history) down to your machine.</span></div>
+          <div class="cmd-row"><code>git push</code><span>Send your local commits up to GitHub for others to see.</span></div>
+          <div class="cmd-row"><code>git pull</code><span>Bring down what others pushed. Do this before starting work.</span></div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="remote-flow" aria-hidden="true">
+          <div class="remote-node"><strong>Local repo</strong><span>your machine</span></div>
+          <div class="remote-node"><strong>GitHub</strong><span>shared remote</span></div>
+        </div>
+        <div class="safebox" style="font-size:.9em;">Golden habit: <strong>pull before you start, push when you pause.</strong> It keeps you and your team in sync and avoids most conflicts.</div>
+      </div>
     </div>
-    <div class="safebox" style="font-size:.9em;">Golden habit: <strong>pull before you start, push when you pause.</strong> It keeps you and your team in sync and avoids most conflicts.</div>
     <aside class="notes">
       clone once, then push/pull forever. The pull-first habit prevents the majority of merge headaches.
     </aside>
   </section>
 
   <section>
-    <h2>Pull requests: how changes get reviewed</h2>
+    <h2>Pull requests are review checkpoints</h2>
     <div class="cols" style="font-size:.8em;">
       <div class="col">
         <p>A <strong>pull request (PR)</strong> is how you propose merging your branch into <code>main</code> on GitHub. It says: &ldquo;here&rsquo;s my work &mdash; please review before it goes in.&rdquo;</p>
@@ -533,7 +1532,7 @@ hello there
   </section>
 
   <section data-background-color="#f4f8fb">
-    <h2>Working with GitHub &mdash; both ways</h2>
+    <h2>A branch becomes a pull request</h2>
     <div class="ha-grid">
       <div class="ha-panel human">
         <span class="ha-label">You (human)</span>
@@ -546,7 +1545,7 @@ git push -u origin fix-typo</code></pre>
       <div class="ha-panel agent">
         <span class="ha-label">Ask the agent</span>
         <p class="say">&ldquo;Clone team/app, make a branch, fix the typo, push it, and open a pull request.&rdquo;</p>
-        <p>Agents with GitHub access can do the whole flow &mdash; you review the PR before merging.</p>
+        <p>Agents with configured GitHub access can do the whole flow &mdash; you review the PR before merging.</p>
       </div>
     </div>
     <p class="footnote">Pushing usually requires a one-time login (a token or SSH key). An agent may ask you to set this up once.</p>
@@ -561,7 +1560,7 @@ git push -u origin fix-typo</code></pre>
 <!-- ===== 06-with-agents.html ===== -->
 <section>
 
-  <section class="module-cover" data-background-color="#fbfaf6">
+  <section class="module-cover mod-06" data-background-color="#fbfaf6">
     <span class="modnum">06</span>
     <p class="kicker">Module 6</p>
     <h1>Working with agents</h1>
@@ -572,7 +1571,7 @@ git push -u origin fix-typo</code></pre>
   </section>
 
   <section>
-    <h2>What&rsquo;s worth delegating</h2>
+    <h2>Delegate reversible Git work</h2>
     <div class="cols" style="font-size:.8em;">
       <div class="col">
         <p><strong>Great to hand off</strong> <span class="tag safe">low risk</span></p>
@@ -590,30 +1589,30 @@ git push -u origin fix-typo</code></pre>
   </section>
 
   <section data-background-color="#f4f8fb">
-    <h2>The review habit</h2>
+    <h2>Review the diff before it counts</h2>
     <p style="font-size:.8em;">Before you accept an agent&rsquo;s Git work, do the same check you&rsquo;d do for a colleague&rsquo;s:</p>
-    <div class="cols c-3" style="font-size:.76em;">
-      <div class="card" style="--card-accent:var(--ait-amber);">
-        <h4>1. Read the diff</h4>
-        <p>&ldquo;Show me exactly what changed.&rdquo; Skim the actual lines, not just the summary.</p>
+    <div class="review-loop">
+      <div class="review-step">
+        <strong>1. Read the diff</strong>
+        <span>&ldquo;Show me exactly what changed.&rdquo; Skim the actual lines, not just the summary.</span>
       </div>
-      <div class="card" style="--card-accent:var(--ait-amber);">
-        <h4>2. Check the message</h4>
-        <p>Does the commit message honestly describe the change? Rewrite it if not.</p>
+      <div class="review-step">
+        <strong>2. Check the message</strong>
+        <span>Does the commit message honestly describe the change? Rewrite it if not.</span>
       </div>
-      <div class="card" style="--card-accent:var(--ait-amber);">
-        <h4>3. Confirm the target</h4>
-        <p>Which branch? Pushed where? Never let a surprise land on shared <code>main</code>.</p>
+      <div class="review-step">
+        <strong>3. Confirm the target</strong>
+        <span>Which branch? Pushed where? Never let a surprise land on shared <code>main</code>.</span>
       </div>
     </div>
-    <div class="safebox">Git makes this safe: because every agent action is a commit, you can always inspect it and undo it.</div>
+    <div class="safebox">Git makes this safe when you turn the agent&rsquo;s work into a commit: you can inspect that checkpoint and undo it.</div>
     <aside class="notes">
       Three-step review. Reading the diff is non-negotiable. This is where the git mental model pays off directly.
     </aside>
   </section>
 
   <section>
-    <h2>Good prompts for Git tasks</h2>
+    <h2>Good Git prompts remove guesswork</h2>
     <div class="cols" style="font-size:.8em;">
       <div class="col">
         <p><span class="tag safe">Clear</span></p>
@@ -632,7 +1631,7 @@ git push -u origin fix-typo</code></pre>
   </section>
 
   <section data-background-color="#f4f8fb">
-    <h2>You stay responsible</h2>
+    <h2>The commit still belongs to you</h2>
     <div class="cols" style="font-size:.84em;">
       <div class="col">
         <p>Your name goes on the commit. Your team relies on what lands in <code>main</code>. The agent is a fast pair of hands &mdash; the accountability is still yours.</p>
@@ -652,7 +1651,7 @@ git push -u origin fix-typo</code></pre>
 <!-- ===== 07-never-forget.html ===== -->
 <section>
 
-  <section class="module-cover" data-background-color="#fbfaf6">
+  <section class="module-cover mod-07" data-background-color="#fbfaf6">
     <span class="modnum">07</span>
     <p class="kicker">Module 7</p>
     <h1>Rules to never forget</h1>
@@ -663,7 +1662,7 @@ git push -u origin fix-typo</code></pre>
   </section>
 
   <section>
-    <h2>Good habits</h2>
+    <h2>Three habits prevent most pain</h2>
     <div class="cols c-3" style="font-size:.74em;">
       <div class="card" style="--card-accent:var(--ait-green);">
         <h4>Commit small &amp; often</h4>
@@ -685,7 +1684,7 @@ git push -u origin fix-typo</code></pre>
   </section>
 
   <section data-background-color="#f4f8fb">
-    <h2>Two things that bite</h2>
+    <h2>Secrets and force-pushes are special risks</h2>
     <div class="cols" style="font-size:.82em;">
       <div class="col">
         <div class="warnbox"><strong>Never commit secrets.</strong> Passwords, API keys, tokens &mdash; once pushed, treat them as leaked <em>even if you delete them later</em>, because they stay in history.</div>
@@ -701,7 +1700,7 @@ git push -u origin fix-typo</code></pre>
   </section>
 
   <section>
-    <h2>How to undo (the calm menu)</h2>
+    <h2>Undo by matching fix to situation</h2>
     <p style="font-size:.8em;">Almost nothing in Git is truly lost. Match the situation to the fix:</p>
     <div class="cmd-list">
       <div class="cmd-row"><code>git restore &lt;file&gt;</code><span>Throw away un-staged edits to a file &mdash; back to last commit.</span></div>
@@ -716,7 +1715,7 @@ git push -u origin fix-typo</code></pre>
   </section>
 
   <section data-background-color="#f4f8fb">
-    <h2>Undoing &mdash; both ways</h2>
+    <h2>Revert shared mistakes calmly</h2>
     <div class="ha-grid">
       <div class="ha-panel human">
         <span class="ha-label">You (human)</span>
@@ -741,7 +1740,7 @@ git revert a1b2c3d      # undo it safely</code></pre>
 <!-- ===== 08-cheatsheet.html ===== -->
 <section>
 
-  <section class="module-cover" data-background-color="#fbfaf6">
+  <section class="module-cover mod-08" data-background-color="#fbfaf6">
     <span class="modnum">08</span>
     <p class="kicker">Module 8</p>
     <h1>The cheat sheet</h1>
@@ -751,8 +1750,8 @@ git revert a1b2c3d      # undo it safely</code></pre>
     </aside>
   </section>
 
-  <section>
-    <h2>The commands you actually use</h2>
+  <section class="cheat-sheet">
+    <h2>Ten commands cover daily Git</h2>
     <div class="cols" style="font-size:.72em;">
       <div class="col">
         <p><strong>Daily loop</strong></p>
@@ -781,7 +1780,7 @@ git revert a1b2c3d      # undo it safely</code></pre>
   </section>
 
   <section data-background-color="#f4f8fb">
-    <h2>The rules, in one breath</h2>
+    <h2>The rules fit in one breath</h2>
     <div class="cols" style="font-size:.8em;">
       <div class="col">
         <p class="say" style="background:rgba(52,149,111,.09);"><strong>Do:</strong> commit small &amp; often &middot; write honest messages &middot; pull before you start &middot; read the diff before you accept &middot; use <code>.gitignore</code>.</p>
@@ -797,7 +1796,7 @@ git revert a1b2c3d      # undo it safely</code></pre>
   </section>
 
   <section>
-    <h2>Working with your agent, summed up</h2>
+    <h2>You bring judgement; the agent brings speed</h2>
     <div class="ha-grid">
       <div class="ha-panel human">
         <span class="ha-label">Your job</span>
@@ -820,7 +1819,7 @@ git revert a1b2c3d      # undo it safely</code></pre>
 <!-- ===== 99-references.html ===== -->
 <section>
 
-  <section class="module-cover" data-background-color="#fbfaf6">
+  <section class="module-cover mod-ref" data-background-color="#fbfaf6">
     <span class="modnum">&mdash;</span>
     <p class="kicker">References</p>
     <h1>Learn more</h1>
@@ -831,7 +1830,7 @@ git revert a1b2c3d      # undo it safely</code></pre>
   </section>
 
   <section>
-    <h2>Primary sources</h2>
+    <h2>Use primary sources when Git feels fuzzy</h2>
     <div class="cols" style="font-size:.8em;">
       <div class="col">
         <p><strong>Git (the tool)</strong></p>
@@ -857,7 +1856,7 @@ git revert a1b2c3d      # undo it safely</code></pre>
   </section>
 
   <section data-background-color="#f4f8fb">
-    <h2>Quick reference, verbatim</h2>
+    <h2>The official definitions are short</h2>
     <div class="quote-strip">
       <blockquote>&ldquo;Git is a free and open source distributed version control system.&rdquo;<cite>git-scm.com</cite></blockquote>
       <blockquote>&ldquo;A pull request&hellip; lets you tell others about changes you&rsquo;ve pushed to a branch.&rdquo;<cite>GitHub Docs</cite></blockquote>
@@ -869,7 +1868,7 @@ git revert a1b2c3d      # undo it safely</code></pre>
   </section>
 
   <section>
-    <h2>That&rsquo;s the module</h2>
+    <h2>Make one real commit next</h2>
     <div class="takeaway" style="font-size:1.1em;">You now have the mental model, the daily loop, the collaboration flow, the safety rules &mdash; and how to do all of it with an agent while staying in control.</div>
     <p class="footnote">Next step: open a real folder, run <code>git init</code>, and make your first commit. Or ask your agent to walk you through it.</p>
     <aside class="notes">
@@ -879,30 +1878,18 @@ git revert a1b2c3d      # undo it safely</code></pre>
 
 </section>
 
-<!-- ==== END MODULES ==== -->
     </div>
   </div>
-
-  <script src="vendor/reveal/dist/reveal.js"></script>
-  <script src="vendor/reveal/plugin/notes/notes.js"></script>
-  <script src="vendor/reveal/plugin/highlight/highlight.js"></script>
-  <script src="vendor/reveal/plugin/zoom/zoom.js"></script>
-  <script src="vendor/reveal/plugin/search/search.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/notes/notes.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/highlight.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/zoom/zoom.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/search/search.js"></script>
   <script>
     Reveal.initialize({
-      hash: true,
-      history: true,
-      slideNumber: 'c/t',
-      transition: 'slide',
-      backgroundTransition: 'fade',
-      controls: true,
-      progress: true,
-      center: false,
-      width: 1280,
-      height: 720,
-      margin: 0.06,
-      minScale: 0.2,
-      maxScale: 1.5,
+      hash: true, history: true, slideNumber: 'c/t', transition: 'slide',
+      backgroundTransition: 'fade', controls: true, progress: true, center: false,
+      width: 1280, height: 720, margin: 0.06, minScale: 0.2, maxScale: 1.5,
       plugins: [ RevealNotes, RevealHighlight, RevealZoom, RevealSearch ]
     });
   </script>

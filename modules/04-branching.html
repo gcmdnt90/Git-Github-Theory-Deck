@@ -1,6 +1,6 @@
 <section>
 
-  <section class="module-cover" data-background-color="#fbfaf6">
+  <section class="module-cover mod-04" data-background-color="#fbfaf6">
     <span class="modnum">04</span>
     <p class="kicker">Module 4</p>
     <h1>Branching &amp; merging</h1>
@@ -11,13 +11,24 @@
   </section>
 
   <section>
-    <h2>What a branch is for</h2>
+    <h2>Branches keep experiments off main</h2>
     <div class="cols" style="font-size:.82em;">
       <div class="col">
         <p>Your working version lives on a branch, usually called <code>main</code>. You want <code>main</code> to always work.</p>
         <p>To try a change, you <strong>branch off</strong>: make a parallel copy, experiment there, and only bring it back to <code>main</code> when it&rsquo;s good.</p>
       </div>
       <div class="col">
+        <div class="branch-graph" aria-hidden="true">
+          <span class="branch-node n1"></span>
+          <span class="branch-node n2"></span>
+          <span class="branch-node n3"></span>
+          <span class="branch-node n4"></span>
+          <span class="branch-node n5"></span>
+          <span class="branch-node n6"></span>
+          <span class="branch-label main">main</span>
+          <span class="branch-label feature">new-feature</span>
+          <span class="branch-label merge">merge</span>
+        </div>
         <div class="safebox">If the experiment fails, you just delete the branch. <code>main</code> never knew it existed.</div>
         <p style="font-size:.9em;">This is why teams can work in parallel: everyone on their own branch, merging in when ready.</p>
       </div>
@@ -28,7 +39,7 @@
   </section>
 
   <section data-background-color="#f4f8fb">
-    <h2>Branching &mdash; both ways</h2>
+    <h2>Branch, work, merge when ready</h2>
     <div class="ha-grid">
       <div class="ha-panel human">
         <span class="ha-label">You (human)</span>
@@ -51,16 +62,16 @@ git merge new-feature       # bring the work in</code></pre>
   </section>
 
   <section>
-    <h2>Merge conflicts &mdash; not scary</h2>
+    <h2>A conflict is Git asking a question</h2>
     <div class="cols" style="font-size:.82em;">
       <div class="col">
         <p>A conflict happens when two branches changed the <strong>same lines</strong>. Git can&rsquo;t guess which to keep, so it asks you.</p>
         <p>It marks the spot in the file:</p>
-        <pre><code class="language-text">&lt;&lt;&lt;&lt;&lt;&lt;&lt; your version
+        <pre><code class="language-text">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
 hello world
 =======
 hello there
-&gt;&gt;&gt;&gt;&gt;&gt;&gt; their version</code></pre>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; new-feature</code></pre>
       </div>
       <div class="col">
         <p>You edit the file to the version you want, delete the marker lines, then <code>git add</code> and <code>git commit</code>.</p>
