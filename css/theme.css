@@ -38,6 +38,22 @@
   text-align: left;
 }
 
+.reveal:not(.ready) .slides > section {
+  display: none !important;
+}
+
+.reveal:not(.ready) .slides > section:first-child {
+  display: block !important;
+}
+
+.reveal:not(.ready) .slides > section:first-child > section {
+  display: none !important;
+}
+
+.reveal:not(.ready) .slides > section:first-child > section:first-child {
+  display: block !important;
+}
+
 .reveal .slides > section,
 .reveal .slides > section > section {
   padding: 44px 58px !important;

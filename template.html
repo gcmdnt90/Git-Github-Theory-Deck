@@ -4,10 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Git &amp; GitHub — for humans and their agents</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reset.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/theme/white.css" id="theme">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/monokai.css">
+  <link rel="stylesheet" href="vendor/reveal/dist/reset.css">
+  <link rel="stylesheet" href="vendor/reveal/dist/reveal.css">
+  <link rel="stylesheet" href="vendor/reveal/dist/theme/white.css" id="theme">
+  <link rel="stylesheet" href="vendor/reveal/plugin/highlight/monokai.css">
   <style>
 {{THEME_CSS}}
   </style>
@@ -18,18 +18,42 @@
 {{MODULES}}
     </div>
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/notes/notes.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/highlight.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/zoom/zoom.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/search/search.js"></script>
+  <script src="vendor/reveal/dist/reveal.js"></script>
+  <script src="vendor/reveal/plugin/notes/notes.js"></script>
+  <script src="vendor/reveal/plugin/highlight/highlight.js"></script>
+  <script src="vendor/reveal/plugin/zoom/zoom.js"></script>
+  <script src="vendor/reveal/plugin/search/search.js"></script>
   <script>
-    Reveal.initialize({
-      hash: true, history: true, slideNumber: 'c/t', transition: 'slide',
-      backgroundTransition: 'fade', controls: true, progress: true, center: false,
-      width: 1280, height: 720, margin: 0.06, minScale: 0.2, maxScale: 1.5,
-      plugins: [ RevealNotes, RevealHighlight, RevealZoom, RevealSearch ]
-    });
+    (function () {
+      if (!window.Reveal) {
+        document.documentElement.classList.add('reveal-load-failed');
+        return;
+      }
+
+      var plugins = [
+        window.RevealNotes,
+        window.RevealHighlight,
+        window.RevealZoom,
+        window.RevealSearch
+      ].filter(Boolean);
+
+      window.Reveal.initialize({
+        hash: true,
+        history: true,
+        slideNumber: 'c/t',
+        transition: 'slide',
+        backgroundTransition: 'fade',
+        controls: true,
+        progress: true,
+        center: false,
+        width: 1280,
+        height: 720,
+        margin: 0.06,
+        minScale: 0.2,
+        maxScale: 1.5,
+        plugins: plugins
+      });
+    }());
   </script>
 </body>
 </html>
